@@ -1,0 +1,3822 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<meta name="theme-color" content="#4c1d95">
+<title>جامعة سمية — SOMAYA UNIVERSITY</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700;800&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════
+   الجزء الأول: المتغيرات والأساسيات
+   ═══════════════════════════════════════════════════════════ */
+:root {
+  --royal: #4c1d95;
+  --royal-2: #6d28d9;
+  --lilac: #a78bfa;
+  --lilac-soft: #c4b5fd;
+  --pink: #f9a8d4;
+  --pink-deep: #ec4899;
+  --ivory: #fdfcfb;
+  --ivory-2: #f5f3ff;
+  --ink: #1e1b2e;
+  --ink-2: #3b3654;
+  --muted: #6b6880;
+  --line: #e9e5f5;
+  --card: #ffffff;
+  --success: #10b981;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --grad-royal: linear-gradient(135deg, #4c1d95 0%, #6d28d9 50%, #8b5cf6 100%);
+  --grad-warm: linear-gradient(135deg, #7c3aed 0%, #a78bfa 50%, #f9a8d4 100%);
+  --grad-glass: linear-gradient(135deg, rgba(255,255,255,.7), rgba(255,255,255,.3));
+  --shadow-sm: 0 2px 8px rgba(76,29,149,.06);
+  --shadow: 0 8px 24px rgba(76,29,149,.10);
+  --shadow-lg: 0 20px 60px rgba(76,29,149,.18);
+  --radius-sm: 12px;
+  --radius: 20px;
+  --radius-lg: 28px;
+  --nav-h: 68px;
+  --bottom-h: 72px;
+  --font-head: 'Alexandria', 'Cairo', sans-serif;
+  --font-body: 'Cairo', 'Alexandria', sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--ivory);
+  color: var(--ink);
+  line-height: 1.7;
+  font-size: 16px;
+  overflow-x: hidden;
+  padding-bottom: calc(var(--bottom-h) + 8px);
+  -webkit-font-smoothing: antialiased;
+}
+
+body.dark {
+  --ivory: #14101f;
+  --ivory-2: #1c1730;
+  --ink: #f0edff;
+  --ink-2: #d4cef0;
+  --muted: #a29cc0;
+  --line: #2a2244;
+  --card: #1c1730;
+  --shadow-sm: 0 2px 8px rgba(0,0,0,.4);
+  --shadow: 0 8px 24px rgba(0,0,0,.5);
+  --shadow-lg: 0 20px 60px rgba(0,0,0,.6);
+  background: #14101f;
+}
+
+body.focus-mode .app-header,
+body.focus-mode .bottom-nav,
+body.focus-mode .fab-top { display: none !important; }
+body.focus-mode { padding-bottom: 0; }
+
+h1,h2,h3,h4,h5 { font-family: var(--font-head); font-weight: 700; line-height: 1.3; color: var(--ink); }
+
+a { color: var(--royal-2); text-decoration: none; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+::selection { background: var(--lilac-soft); color: var(--royal); }
+
+/* ═══════════════════════════════════════════════════════════
+   الجزء الثاني: الهيدر والتنقل
+   ═══════════════════════════════════════════════════════════ */
+.app-header {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(253,252,251,.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--line);
+  height: var(--nav-h);
+  display: flex; align-items: center;
+  padding: 0 16px;
+  gap: 12px;
+}
+body.dark .app-header { background: rgba(20,16,31,.85); }
+
+.header-brand {
+  display: flex; align-items: center; gap: 10px;
+  flex: 1; min-width: 0;
+}
+.brand-logo {
+  width: 40px; height: 40px; border-radius: 12px;
+  background: var(--grad-royal);
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-family: var(--font-head); font-weight: 800;
+  font-size: 18px; flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(76,29,149,.3);
+}
+.brand-text { min-width: 0; }
+.brand-text h1 { font-size: 15px; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.brand-text p { font-size: 10px; color: var(--muted); font-weight: 500; }
+
+.header-actions { display: flex; gap: 8px; align-items: center; }
+.icon-btn {
+  width: 40px; height: 40px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--ivory-2); color: var(--ink-2);
+  transition: all .2s;
+  font-size: 18px;
+}
+.icon-btn:hover, .icon-btn:active { background: var(--lilac-soft); color: var(--royal); transform: scale(.95); }
+
+/* Drawer */
+.drawer-overlay {
+  position: fixed; inset: 0; background: rgba(20,16,31,.5);
+  backdrop-filter: blur(4px);
+  z-index: 200; opacity: 0; pointer-events: none;
+  transition: opacity .3s;
+}
+.drawer-overlay.open { opacity: 1; pointer-events: auto; }
+
+.drawer {
+  position: fixed; top: 0; right: 0; bottom: 0;
+  width: min(320px, 85vw);
+  background: var(--card);
+  z-index: 201;
+  transform: translateX(100%);
+  transition: transform .35s cubic-bezier(.4,0,.2,1);
+  display: flex; flex-direction: column;
+  box-shadow: -20px 0 60px rgba(0,0,0,.2);
+}
+.drawer.open { transform: translateX(0); }
+.drawer-head {
+  padding: 24px 20px 20px;
+  background: var(--grad-royal);
+  color: #fff;
+}
+.drawer-head h2 { color: #fff; font-size: 20px; }
+.drawer-head p { color: rgba(255,255,255,.8); font-size: 13px; margin-top: 4px; }
+.drawer-nav { flex: 1; overflow-y: auto; padding: 12px; }
+.drawer-link {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 14px; border-radius: 14px;
+  color: var(--ink-2); font-weight: 600; font-size: 15px;
+  transition: all .2s; width: 100%; text-align: right;
+  margin-bottom: 4px;
+}
+.drawer-link .di { font-size: 20px; width: 24px; text-align: center; }
+.drawer-link:hover, .drawer-link.active {
+  background: var(--ivory-2); color: var(--royal);
+}
+.drawer-link.active { background: linear-gradient(135deg, rgba(76,29,149,.08), rgba(249,168,212,.12)); }
+
+/* Bottom Nav */
+.bottom-nav {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  height: var(--bottom-h);
+  background: rgba(253,252,251,.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: space-around;
+  padding: 0 8px; z-index: 90;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+body.dark .bottom-nav { background: rgba(20,16,31,.95); }
+
+.bnav-item {
+  flex: 1; display: flex; flex-direction: column; align-items: center;
+  gap: 3px; padding: 8px 4px; border-radius: 14px;
+  color: var(--muted); font-size: 10px; font-weight: 600;
+  transition: all .25s; min-width: 0;
+}
+.bnav-item .bnav-ico {
+  font-size: 22px; transition: transform .25s;
+  display: flex; align-items: center; justify-content: center;
+  width: 36px; height: 32px; border-radius: 10px;
+}
+.bnav-item.active { color: var(--royal-2); }
+.bnav-item.active .bnav-ico {
+  background: linear-gradient(135deg, rgba(76,29,149,.12), rgba(249,168,212,.18));
+  transform: translateY(-2px);
+}
+.bnav-item:active .bnav-ico { transform: scale(.9); }
+
+/* FAB */
+.fab-top {
+  position: fixed; bottom: calc(var(--bottom-h) + 16px); left: 16px;
+  width: 48px; height: 48px; border-radius: 50%;
+  background: var(--grad-royal); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: var(--shadow-lg); z-index: 80;
+  opacity: 0; pointer-events: none; transition: all .3s;
+  font-size: 20px;
+}
+.fab-top.visible { opacity: 1; pointer-events: auto; }
+.fab-top:active { transform: scale(.9); }
+
+/* ═══════════════════════════════════════════════════════════
+   الجزء الثالث: الحاويات العامة والعناصر
+   ═══════════════════════════════════════════════════════════ */
+.page-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.view { display: none; animation: fadeUp .4s ease; }
+.view.active { display: block; }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.section { margin: 32px 0; }
+.section-title {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 16px;
+}
+.section-title h2 { font-size: 20px; font-weight: 800; }
+.section-title .st-bar {
+  width: 5px; height: 24px; border-radius: 4px;
+  background: var(--grad-warm);
+}
+.section-title .st-more {
+  margin-right: auto; font-size: 12px; color: var(--royal-2);
+  font-weight: 700; padding: 4px 10px; border-radius: 10px;
+  background: var(--ivory-2);
+}
+
+/* Hero */
+.hero {
+  position: relative;
+  border-radius: var(--radius-lg);
+  padding: 32px 24px;
+  margin-top: 16px;
+  overflow: hidden;
+  background: var(--grad-royal);
+  color: #fff;
+  box-shadow: var(--shadow-lg);
+}
+.hero::before {
+  content: ''; position: absolute;
+  top: -60px; left: -60px; width: 240px; height: 240px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(249,168,212,.4), transparent 70%);
+  filter: blur(20px);
+}
+.hero::after {
+  content: ''; position: absolute;
+  bottom: -80px; right: -40px; width: 200px; height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(167,139,250,.5), transparent 70%);
+  filter: blur(20px);
+}
+.hero-content { position: relative; z-index: 2; }
+.hero-greet {
+  font-size: 13px; font-weight: 600;
+  color: rgba(255,255,255,.8);
+  display: flex; align-items: center; gap: 6px;
+  margin-bottom: 8px;
+}
+.hero-name { font-family: var(--font-head); font-size: 28px; font-weight: 800; margin-bottom: 10px; }
+.hero-quote {
+  font-size: 14px; color: rgba(255,255,255,.9);
+  line-height: 1.6; min-height: 44px;
+  font-weight: 500;
+}
+.hero-quote-ico { font-size: 22px; opacity: .5; margin-left: 4px; }
+.hero-stats {
+  display: flex; gap: 12px; margin-top: 20px;
+  position: relative; z-index: 2;
+}
+.hero-stat {
+  flex: 1; background: rgba(255,255,255,.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 16px; padding: 12px 10px; text-align: center;
+}
+.hero-stat .hs-num { font-family: var(--font-head); font-size: 22px; font-weight: 800; }
+.hero-stat .hs-lbl { font-size: 10px; color: rgba(255,255,255,.8); margin-top: 2px; font-weight: 600; }
+
+/* Progress Ring */
+.progress-ring-wrap {
+  display: flex; align-items: center; gap: 20px;
+  background: var(--card); border-radius: var(--radius);
+  padding: 20px; box-shadow: var(--shadow-sm);
+  border: 1px solid var(--line);
+}
+.progress-ring { position: relative; width: 90px; height: 90px; flex-shrink: 0; }
+.progress-ring svg { transform: rotate(-90deg); }
+.progress-ring circle { fill: none; stroke-width: 8; }
+.progress-ring .ring-bg { stroke: var(--line); }
+.progress-ring .ring-fg {
+  stroke: url(#ringGrad); stroke-linecap: round;
+  transition: stroke-dashoffset 1s ease;
+}
+.progress-ring .ring-text {
+  position: absolute; inset: 0; display: flex;
+  align-items: center; justify-content: center;
+  font-family: var(--font-head); font-weight: 800; font-size: 20px;
+  color: var(--royal);
+}
+.progress-info h3 { font-size: 16px; margin-bottom: 4px; }
+.progress-info p { font-size: 13px; color: var(--muted); }
+.progress-info .pi-bar {
+  height: 8px; background: var(--line); border-radius: 8px;
+  margin-top: 10px; overflow: hidden;
+}
+.progress-info .pi-bar-fill {
+  height: 100%; border-radius: 8px;
+  background: var(--grad-warm); transition: width 1s;
+}
+
+/* Cards Grid */
+.cards-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+@media (min-width: 640px) {
+  .cards-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (min-width: 900px) {
+  .cards-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* Course Card */
+.course-card {
+  background: var(--card); border-radius: var(--radius);
+  padding: 18px; box-shadow: var(--shadow-sm);
+  border: 1px solid var(--line);
+  transition: all .25s; cursor: pointer;
+  display: flex; flex-direction: column; gap: 10px;
+  position: relative; overflow: hidden;
+}
+.course-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: var(--lilac-soft); }
+.course-card:active { transform: scale(.98); }
+.cc-head { display: flex; align-items: center; gap: 12px; }
+.cc-icon {
+  width: 46px; height: 46px; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; flex-shrink: 0;
+}
+.cc-icon.purple { background: linear-gradient(135deg, #ede9fe, #ddd6fe); }
+.cc-icon.pink { background: linear-gradient(135deg, #fce7f3, #fbcfe8); }
+.cc-icon.blue { background: linear-gradient(135deg, #e0e7ff, #c7d2fe); }
+.cc-icon.green { background: linear-gradient(135deg, #d1fae5, #a7f3d0); }
+.cc-icon.amber { background: linear-gradient(135deg, #fef3c7, #fde68a); }
+body.dark .cc-icon.purple { background: rgba(139,92,246,.2); }
+body.dark .cc-icon.pink { background: rgba(236,72,153,.2); }
+body.dark .cc-icon.blue { background: rgba(59,130,246,.2); }
+body.dark .cc-icon.green { background: rgba(16,185,129,.2); }
+body.dark .cc-icon.amber { background: rgba(245,158,11,.2); }
+
+.cc-title { font-size: 15px; font-weight: 700; }
+.cc-sub { font-size: 12px; color: var(--muted); }
+.cc-meta { display: flex; gap: 12px; font-size: 11px; color: var(--muted); align-items: center; }
+.cc-meta .chip {
+  padding: 3px 8px; border-radius: 8px;
+  background: var(--ivory-2); font-weight: 600;
+  color: var(--royal-2); font-size: 10px;
+}
+.cc-progress {
+  height: 6px; background: var(--line); border-radius: 6px; overflow: hidden;
+}
+.cc-progress-fill {
+  height: 100%; border-radius: 6px;
+  background: var(--grad-warm); transition: width .6s;
+}
+
+/* Lesson Item */
+.lesson-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px; border-radius: 16px;
+  background: var(--card); border: 1px solid var(--line);
+  margin-bottom: 8px; transition: all .2s;
+  cursor: pointer;
+}
+.lesson-item:hover { border-color: var(--lilac-soft); background: var(--ivory-2); }
+.lesson-item .li-num {
+  width: 34px; height: 34px; border-radius: 10px;
+  background: var(--ivory-2); color: var(--royal-2);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-head); font-weight: 800; font-size: 14px;
+  flex-shrink: 0;
+}
+.lesson-item.done .li-num { background: var(--success); color: #fff; }
+.lesson-item .li-body { flex: 1; min-width: 0; }
+.lesson-item .li-title { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+.lesson-item .li-sub { font-size: 11px; color: var(--muted); }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 8px; padding: 12px 20px; border-radius: 14px;
+  font-weight: 700; font-size: 14px;
+  transition: all .2s; font-family: var(--font-body);
+}
+.btn-primary {
+  background: var(--grad-royal); color: #fff;
+  box-shadow: 0 6px 20px rgba(76,29,149,.3);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(76,29,149,.4); }
+.btn-primary:active { transform: scale(.97); }
+.btn-ghost {
+  background: var(--ivory-2); color: var(--royal-2);
+}
+.btn-ghost:hover { background: var(--lilac-soft); }
+.btn-sm { padding: 8px 14px; font-size: 12px; border-radius: 10px; }
+.btn-full { width: 100%; }
+.btn-danger { background: linear-gradient(135deg, #ef4444, #dc2626); color: #fff; }
+.btn-success { background: linear-gradient(135deg, #10b981, #059669); color: #fff; }
+
+/* ═══════════════════════════════════════════════════════════
+   الجزء الرابع: الدرس والمحتوى التعليمي
+   ═══════════════════════════════════════════════════════════ */
+.lesson-view {
+  background: var(--card); border-radius: var(--radius);
+  padding: 24px 20px; box-shadow: var(--shadow-sm);
+  border: 1px solid var(--line);
+}
+.lv-head { margin-bottom: 20px; }
+.lv-badge {
+  display: inline-block; padding: 4px 10px; border-radius: 8px;
+  background: var(--ivory-2); color: var(--royal-2);
+  font-size: 11px; font-weight: 700; margin-bottom: 8px;
+}
+.lv-title { font-size: 22px; font-weight: 800; margin-bottom: 8px; }
+.lv-meta { display: flex; gap: 12px; font-size: 12px; color: var(--muted); }
+
+.content-block { margin-bottom: 22px; }
+.content-block h3 {
+  font-size: 17px; font-weight: 800; margin-bottom: 10px;
+  display: flex; align-items: center; gap: 8px;
+  color: var(--royal);
+}
+.content-block h3::before {
+  content: ''; width: 4px; height: 18px;
+  background: var(--grad-warm); border-radius: 3px;
+}
+.content-block p {
+  font-size: 15px; line-height: 1.9; color: var(--ink-2);
+  margin-bottom: 10px;
+}
+.content-block ul, .content-block ol {
+  margin: 10px 20px; line-height: 1.9;
+}
+.content-block li {
+  margin-bottom: 8px; font-size: 15px; color: var(--ink-2);
+}
+.content-block li::marker { color: var(--royal-2); font-weight: 700; }
+
+.def-box {
+  background: linear-gradient(135deg, rgba(76,29,149,.06), rgba(249,168,212,.08));
+  border-right: 4px solid var(--royal-2);
+  border-radius: 12px; padding: 14px 16px;
+  margin: 12px 0;
+}
+.def-box .def-label {
+  font-size: 11px; font-weight: 800; color: var(--royal-2);
+  margin-bottom: 4px; text-transform: uppercase;
+}
+.def-box p { margin: 0; font-size: 14px; }
+
+.example-box {
+  background: linear-gradient(135deg, rgba(16,185,129,.06), rgba(245,158,11,.06));
+  border-right: 4px solid var(--success);
+  border-radius: 12px; padding: 14px 16px;
+  margin: 12px 0;
+}
+.example-box .ex-label {
+  font-size: 11px; font-weight: 800; color: var(--success);
+  margin-bottom: 4px; display: flex; align-items: center; gap: 4px;
+}
+.example-box p { margin: 0; font-size: 14px; }
+
+.warn-box {
+  background: rgba(245,158,11,.08);
+  border-right: 4px solid var(--warning);
+  border-radius: 12px; padding: 14px 16px; margin: 12px 0;
+}
+.warn-box .warn-label {
+  font-size: 11px; font-weight: 800; color: var(--warning);
+  margin-bottom: 4px;
+}
+.warn-box p { margin: 0; font-size: 14px; }
+
+.summary-box {
+  background: var(--ivory-2); border-radius: 14px;
+  padding: 16px; margin: 12px 0;
+  border: 1px dashed var(--lilac-soft);
+}
+
+.compare-table {
+  width: 100%; border-collapse: separate; border-spacing: 0;
+  margin: 12px 0; font-size: 13px;
+  border-radius: 12px; overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+.compare-table th {
+  background: var(--grad-royal); color: #fff;
+  padding: 10px 8px; font-weight: 700; font-size: 12px;
+}
+.compare-table td {
+  padding: 10px 8px; background: var(--card);
+  border-bottom: 1px solid var(--line);
+}
+.compare-table tr:last-child td { border-bottom: none; }
+.compare-table tr:nth-child(even) td { background: var(--ivory-2); }
+
+.timeline {
+  position: relative; padding-right: 30px; margin: 20px 0;
+}
+.timeline::before {
+  content: ''; position: absolute; right: 10px; top: 0; bottom: 0;
+  width: 3px; background: linear-gradient(180deg, var(--royal), var(--pink));
+  border-radius: 3px;
+}
+.tl-item {
+  position: relative; margin-bottom: 20px;
+  padding: 12px 14px; background: var(--card);
+  border-radius: 12px; border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+}
+.tl-item::before {
+  content: ''; position: absolute; right: -25px; top: 16px;
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--royal-2); border: 3px solid var(--card);
+  box-shadow: 0 0 0 2px var(--lilac-soft);
+}
+.tl-item .tl-year {
+  font-family: var(--font-head); font-weight: 800;
+  color: var(--royal-2); font-size: 14px; margin-bottom: 4px;
+}
+.tl-item .tl-title { font-weight: 700; font-size: 14px; margin-bottom: 4px; }
+.tl-item .tl-desc { font-size: 13px; color: var(--muted); }
+
+/* ═══════════════════════════════════════════════════════════
+   الجزء الخامس: الاختبارات
+   ═══════════════════════════════════════════════════════════ */
+.quiz-wrap { background: var(--card); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow-sm); border: 1px solid var(--line); }
+.quiz-q { margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--line); }
+.quiz-q:last-child { border-bottom: none; }
+.q-num { font-size: 11px; color: var(--muted); font-weight: 700; margin-bottom: 6px; }
+.q-text { font-size: 15px; font-weight: 700; margin-bottom: 14px; line-height: 1.6; }
+.opt {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 12px 14px; border-radius: 12px;
+  border: 2px solid var(--line); background: var(--card);
+  margin-bottom: 8px; cursor: pointer;
+  transition: all .2s; font-size: 14px;
+}
+.opt:hover { border-color: var(--lilac-soft); background: var(--ivory-2); }
+.opt.selected { border-color: var(--royal-2); background: rgba(109,40,217,.05); }
+.opt.correct { border-color: var(--success); background: rgba(16,185,129,.08); }
+.opt.wrong { border-color: var(--danger); background: rgba(239,68,68,.08); }
+.opt-marker {
+  width: 22px; height: 22px; border-radius: 50%;
+  border: 2px solid var(--line); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 800; color: var(--muted);
+  margin-top: 1px;
+}
+.opt.selected .opt-marker { border-color: var(--royal-2); background: var(--royal-2); color: #fff; }
+.opt.correct .opt-marker { border-color: var(--success); background: var(--success); color: #fff; }
+.opt.wrong .opt-marker { border-color: var(--danger); background: var(--danger); color: #fff; }
+.opt-body { flex: 1; }
+.opt-explain {
+  margin-top: 6px; font-size: 12px;
+  color: var(--muted); line-height: 1.6;
+  padding-top: 6px; border-top: 1px dashed var(--line);
+}
+.q-feedback {
+  margin-top: 10px; padding: 10px 12px;
+  border-radius: 10px; font-size: 13px;
+  line-height: 1.6;
+}
+.q-feedback.ok { background: rgba(16,185,129,.08); color: #047857; border-right: 3px solid var(--success); }
+.q-feedback.bad { background: rgba(239,68,68,.08); color: #b91c1c; border-right: 3px solid var(--danger); }
+
+.quiz-result {
+  text-align: center; padding: 30px 20px;
+  background: var(--grad-royal); color: #fff;
+  border-radius: var(--radius); margin-top: 20px;
+}
+.quiz-result .qr-score {
+  font-family: var(--font-head); font-size: 48px; font-weight: 800;
+  margin: 10px 0;
+}
+.quiz-result .qr-lbl { font-size: 14px; color: rgba(255,255,255,.85); }
+
+/* ═══════════════════════════════════════════════════════════
+   الجزء السادس: المميزات الإضافية
+   ═══════════════════════════════════════════════════════════ */
+.tool-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+@media (min-width: 640px) { .tool-grid { grid-template-columns: repeat(3, 1fr); } }
+
+.tool-card {
+  background: var(--card); border-radius: 16px;
+  padding: 16px 12px; text-align: center;
+  box-shadow: var(--shadow-sm); border: 1px solid var(--line);
+  transition: all .2s; cursor: pointer;
+}
+.tool-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+.tool-card .tc-ico {
+  width: 48px; height: 48px; border-radius: 14px;
+  background: var(--ivory-2); color: var(--royal-2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; margin: 0 auto 10px;
+}
+.tool-card .tc-title { font-size: 13px; font-weight: 700; }
+.tool-card .tc-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+/* Flashcards */
+.flashcard-stage {
+  perspective: 1200px; margin: 20px 0;
+  display: flex; flex-direction: column; align-items: center;
+}
+.flashcard {
+  width: 100%; max-width: 400px; height: 240px;
+  position: relative; transform-style: preserve-3d;
+  transition: transform .7s; cursor: pointer;
+}
+.flashcard.flipped { transform: rotateY(180deg); }
+.fc-face {
+  position: absolute; inset: 0;
+  backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  border-radius: var(--radius); padding: 24px;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; font-weight: 600; font-size: 17px;
+  box-shadow: var(--shadow);
+}
+.fc-front { background: var(--grad-royal); color: #fff; }
+.fc-back {
+  background: var(--card); color: var(--ink);
+  transform: rotateY(180deg);
+  border: 2px solid var(--lilac-soft);
+  font-size: 15px; line-height: 1.7;
+}
+
+/* Pomodoro */
+.pomodoro {
+  text-align: center; padding: 24px;
+  background: var(--card); border-radius: var(--radius);
+  box-shadow: var(--shadow-sm); border: 1px solid var(--line);
+}
+.pomo-time {
+  font-family: var(--font-head); font-size: 56px;
+  font-weight: 800; color: var(--royal-2);
+  letter-spacing: 2px; margin: 10px 0;
+}
+.pomo-mode {
+  display: inline-block; padding: 4px 14px; border-radius: 20px;
+  background: var(--ivory-2); font-size: 12px;
+  font-weight: 700; color: var(--royal-2);
+}
+.pomo-actions { display: flex; gap: 10px; justify-content: center; margin-top: 16px; }
+
+/* Notes */
+.note-area {
+  width: 100%; min-height: 100px; border-radius: 14px;
+  padding: 14px; border: 1px solid var(--line);
+  background: var(--ivory-2); font-family: var(--font-body);
+  font-size: 14px; color: var(--ink); resize: vertical;
+  margin-bottom: 10px;
+}
+.note-area:focus { outline: none; border-color: var(--royal-2); background: var(--card); }
+
+.note-card {
+  background: var(--card); border-radius: 12px;
+  padding: 12px 14px; margin-bottom: 8px;
+  border: 1px solid var(--line);
+  border-right: 4px solid var(--lilac);
+  font-size: 14px; position: relative;
+}
+.note-card .nc-date { font-size: 10px; color: var(--muted); margin-bottom: 4px; }
+.note-card .nc-del {
+  position: absolute; top: 8px; left: 8px;
+  width: 24px; height: 24px; border-radius: 8px;
+  background: rgba(239,68,68,.1); color: var(--danger);
+  font-size: 12px;
+}
+
+/* Search */
+.search-input {
+  width: 100%; padding: 14px 16px; border-radius: 14px;
+  border: 1px solid var(--line); background: var(--card);
+  font-family: var(--font-body); font-size: 15px; color: var(--ink);
+  margin-bottom: 16px;
+}
+.search-input:focus { outline: none; border-color: var(--royal-2); box-shadow: 0 0 0 4px rgba(109,40,217,.08); }
+
+/* Task list */
+.task-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 14px; background: var(--card);
+  border-radius: 12px; margin-bottom: 8px;
+  border: 1px solid var(--line);
+}
+.task-check {
+  width: 22px; height: 22px; border-radius: 8px;
+  border: 2px solid var(--line); background: transparent;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; transition: all .2s; cursor: pointer;
+  font-size: 12px; color: transparent;
+}
+.task-check.done { background: var(--success); border-color: var(--success); color: #fff; }
+.task-text { flex: 1; font-size: 14px; }
+.task-item.done .task-text { text-decoration: line-through; color: var(--muted); }
+.task-del {
+  width: 26px; height: 26px; border-radius: 8px;
+  background: rgba(239,68,68,.08); color: var(--danger);
+  font-size: 12px;
+}
+
+/* Achievements */
+.achievements-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;
+}
+@media (min-width: 640px) { .achievements-grid { grid-template-columns: repeat(4, 1fr); } }
+.achievement {
+  background: var(--card); border-radius: 14px;
+  padding: 14px 10px; text-align: center;
+  border: 1px solid var(--line); transition: all .2s;
+}
+.achievement.locked { opacity: .4; filter: grayscale(1); }
+.achievement.unlocked { background: linear-gradient(135deg, rgba(249,168,212,.15), rgba(167,139,250,.15)); border-color: var(--lilac-soft); }
+.ach-ico { font-size: 28px; margin-bottom: 6px; }
+.ach-title { font-size: 11px; font-weight: 700; }
+
+/* Toast */
+.toast {
+  position: fixed; bottom: calc(var(--bottom-h) + 20px);
+  left: 50%; transform: translateX(-50%) translateY(100px);
+  background: var(--ink); color: var(--ivory);
+  padding: 12px 20px; border-radius: 14px;
+  font-size: 13px; font-weight: 600; z-index: 300;
+  opacity: 0; transition: all .35s;
+  box-shadow: var(--shadow-lg); max-width: 90vw;
+  text-align: center;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* Back link */
+.back-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  color: var(--royal-2); font-weight: 700; font-size: 13px;
+  margin-bottom: 16px; padding: 6px 12px; border-radius: 10px;
+  background: var(--ivory-2);
+}
+.back-link:hover { background: var(--lilac-soft); }
+
+/* Exam card */
+.exam-card {
+  background: var(--card); border-radius: var(--radius);
+  padding: 20px; box-shadow: var(--shadow-sm);
+  border: 1px solid var(--line); margin-bottom: 12px;
+}
+.exam-card h3 { font-size: 17px; margin-bottom: 6px; }
+.exam-card p { font-size: 13px; color: var(--muted); margin-bottom: 14px; }
+.exam-meta { display: flex; gap: 14px; font-size: 12px; color: var(--muted); margin-bottom: 14px; }
+
+/* Schedule */
+.schedule-item {
+  display: flex; gap: 12px; padding: 12px 14px;
+  background: var(--card); border-radius: 12px;
+  margin-bottom: 8px; border: 1px solid var(--line);
+  align-items: center;
+}
+.sch-day {
+  width: 46px; height: 46px; border-radius: 12px;
+  background: var(--grad-royal); color: #fff;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  flex-shrink: 0; font-size: 10px; font-weight: 700;
+}
+.sch-day .sd-num { font-family: var(--font-head); font-size: 16px; font-weight: 800; }
+.sch-info { flex: 1; }
+.sch-info h4 { font-size: 14px; margin-bottom: 2px; }
+.sch-info p { font-size: 12px; color: var(--muted); }
+
+/* Empty state */
+.empty-state {
+  text-align: center; padding: 40px 20px;
+  color: var(--muted);
+}
+.empty-state .es-ico { font-size: 48px; margin-bottom: 12px; opacity: .5; }
+.empty-state p { font-size: 14px; }
+
+/* Mobile-specific tweaks */
+@media (max-width: 380px) {
+  .hero { padding: 24px 18px; }
+  .hero-name { font-size: 24px; }
+  .hero-stat .hs-num { font-size: 18px; }
+  .pomo-time { font-size: 44px; }
+}
+
+/* Focus mode banner */
+.focus-banner {
+  position: fixed; top: 0; left: 0; right: 0;
+  background: var(--grad-royal); color: #fff;
+  padding: 8px 16px; text-align: center;
+  font-size: 12px; font-weight: 700; z-index: 150;
+  display: none;
+}
+body.focus-mode .focus-banner { display: block; }
+body.focus-mode { padding-top: 36px; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ HEADER ═══════════════ -->
+<header class="app-header">
+  <div class="header-brand" onclick="nav('home')" style="cursor:pointer">
+    <div class="brand-logo">س</div>
+    <div class="brand-text">
+      <h1>جامعة سمية</h1>
+      <p>SOMAYA UNIVERSITY</p>
+    </div>
+  </div>
+  <div class="header-actions">
+    <button class="icon-btn" id="themeBtn" onclick="toggleTheme()" aria-label="الوضع الليلي">🌙</button>
+    <button class="icon-btn" onclick="toggleDrawer()" aria-label="القائمة">☰</button>
+  </div>
+</header>
+
+<!-- Focus mode banner -->
+<div class="focus-banner">🎯 وضع التركيز مفعّل — <button onclick="toggleFocus()" style="color:#fff;text-decoration:underline;font-size:12px">إنهاء</button></div>
+
+<!-- Drawer -->
+<div class="drawer-overlay" id="drawerOverlay" onclick="toggleDrawer()"></div>
+<nav class="drawer" id="drawer">
+  <div class="drawer-head">
+    <h2>🎓 جامعة سمية</h2>
+    <p>رحلتك نحو المعرفة والتميز الأكاديمي</p>
+  </div>
+  <div class="drawer-nav" id="drawerNav"></div>
+</nav>
+
+<!-- ═══════════════ MAIN CONTENT ═══════════════ -->
+<main class="page-container" style="padding-top:16px;padding-bottom:24px">
+
+  <!-- ═══════ HOME ═══════ -->
+  <section class="view active" id="view-home">
+    <div class="hero">
+      <div class="hero-content">
+        <div class="hero-greet">✨ أهلاً بكِ مجدداً</div>
+        <div class="hero-name">سمية 👋</div>
+        <div class="hero-quote" id="heroQuote">
+          <span class="hero-quote-ico">❝</span>
+          المعرفة قوة، والاقتصاد السياسي مفتاح فهم العالم.
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hs-num" id="statLessons">0</div>
+          <div class="hs-lbl">درس مكتمل</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hs-num" id="statQuizzes">0</div>
+          <div class="hs-lbl">اختبار مجتاز</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hs-num" id="statProgress">0%</div>
+          <div class="hs-lbl">التقدم</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="progress-ring-wrap">
+        <div class="progress-ring">
+          <svg width="90" height="90">
+            <defs>
+              <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#4c1d95"/>
+                <stop offset="100%" stop-color="#ec4899"/>
+              </linearGradient>
+            </defs>
+            <circle class="ring-bg" cx="45" cy="45" r="38"/>
+            <circle class="ring-fg" id="ringFg" cx="45" cy="45" r="38"
+              stroke-dasharray="238.76" stroke-dashoffset="238.76"/>
+          </svg>
+          <div class="ring-text" id="ringText">0%</div>
+        </div>
+        <div class="progress-info">
+          <h3>تقدمك الأكاديمي</h3>
+          <p id="progressMsg">ابدئي رحلتك التعليمية اليوم</p>
+          <div class="pi-bar"><div class="pi-bar-fill" id="piBar" style="width:0%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">
+        <div class="st-bar"></div>
+        <h2>المقاييس الدراسية</h2>
+      </div>
+      <div class="cards-grid">
+        <div class="course-card" onclick="nav('economics')">
+          <div class="cc-head">
+            <div class="cc-icon purple">💰</div>
+            <div>
+              <div class="cc-title">الاقتصاد السياسي</div>
+              <div class="cc-sub">7 محاور • شامل</div>
+            </div>
+          </div>
+          <div class="cc-meta"><span class="chip">مقياس أساسي</span></div>
+          <div class="cc-progress"><div class="cc-progress-fill" id="econProgress" style="width:0%"></div></div>
+        </div>
+        <div class="course-card" onclick="nav('methodology')">
+          <div class="cc-head">
+            <div class="cc-icon pink">🔬</div>
+            <div>
+              <div class="cc-title">منهجية العلوم السياسية</div>
+              <div class="cc-sub">11 محوراً • شامل</div>
+            </div>
+          </div>
+          <div class="cc-meta"><span class="chip">مقياس أساسي</span></div>
+          <div class="cc-progress"><div class="cc-progress-fill" id="methProgress" style="width:0%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">
+        <div class="st-bar"></div>
+        <h2>آخر الدروس</h2>
+      </div>
+      <div id="recentLessons"></div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">
+        <div class="st-bar"></div>
+        <h2>جدول المراجعة الأسبوعي</h2>
+      </div>
+      <div id="weeklySchedule"></div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">
+        <div class="st-bar"></div>
+        <h2>الإنجازات والشهادات</h2>
+      </div>
+      <div class="achievements-grid" id="achievementsGrid"></div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">
+        <div class="st-bar"></div>
+        <h2>وصول سريع</h2>
+      </div>
+      <div class="tool-grid">
+        <div class="tool-card" onclick="nav('quizzes')">
+          <div class="tc-ico">📝</div>
+          <div class="tc-title">الاختبارات</div>
+          <div class="tc-sub">اختبر معلوماتك</div>
+        </div>
+        <div class="tool-card" onclick="nav('flashcards')">
+          <div class="tc-ico">🎴</div>
+          <div class="tc-title">بطاقات المراجعة</div>
+          <div class="tc-sub">Flashcards</div>
+        </div>
+        <div class="tool-card" onclick="nav('glossary')">
+          <div class="tc-ico">📚</div>
+          <div class="tc-title">قاموس المصطلحات</div>
+          <div class="tc-sub">سياسي واقتصادي</div>
+        </div>
+        <div class="tool-card" onclick="nav('pomodoro')">
+          <div class="tc-ico">🍅</div>
+          <div class="tc-title">مؤقت بومودورو</div>
+          <div class="tc-sub">تركيز عميق</div>
+        </div>
+        <div class="tool-card" onclick="nav('notes')">
+          <div class="tc-ico">📝</div>
+          <div class="tc-title">ملاحظاتي</div>
+          <div class="tc-sub">محفوظة تلقائياً</div>
+        </div>
+        <div class="tool-card" onclick="nav('search')">
+          <div class="tc-ico">🔍</div>
+          <div class="tc-title">البحث الشامل</div>
+          <div class="tc-sub">في المنصة</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ ECONOMICS ═══════ -->
+  <section class="view" id="view-economics">
+    <button class="back-link" onclick="nav('home')">→ الرئيسية</button>
+    <div style="margin-bottom:20px">
+      <h2 style="font-size:24px;margin-bottom:6px">💰 الاقتصاد السياسي</h2>
+      <p style="color:var(--muted);font-size:14px">7 محاور شاملة — اضغطي على أي محور للبدء</p>
+    </div>
+    <div id="econUnits"></div>
+  </section>
+
+  <!-- ═══════ METHODOLOGY ═══════ -->
+  <section class="view" id="view-methodology">
+    <button class="back-link" onclick="nav('home')">→ الرئيسية</button>
+    <div style="margin-bottom:20px">
+      <h2 style="font-size:24px;margin-bottom:6px">🔬 منهجية العلوم السياسية</h2>
+      <p style="color:var(--muted);font-size:14px">11 محوراً — اضغطي على أي محور للبدء</p>
+    </div>
+    <div id="methUnits"></div>
+  </section>
+
+  <!-- ═══════ LESSON VIEW ═══════ -->
+  <section class="view" id="view-lesson">
+    <button class="back-link" onclick="goBack()">→ رجوع</button>
+    <div id="lessonContent"></div>
+  </section>
+
+  <!-- ═══════ QUIZZES ═══════ -->
+  <section class="view" id="view-quizzes">
+    <button class="back-link" onclick="nav('home')">→ الرئيسية</button>
+    <div style="margin-bottom:20px">
+      <h2 style="font-size:24px;margin-bottom:6px">📝 الاختبارات</h2>
+      <p style="color:var(--muted);font-size:14px">اختاري اختباراً لقياس مستواك</p>
+    </div>
+    <div id="quizList"></div>
+  </section>
+
+  <!-- ═══════ QUIZ TAKING ═══════ -->
+  <section class="view" id="view-quiz-taking">
+    <button class="back-link" onclick="nav('quizzes')">→ الاختبارات</button>
+    <div id="quizTaking"></div>
+  </section>
+
+  <!-- ═══════ FLASHCARDS ═══════ -->
+  <section class="view" id="view-flashcards">
+    <button class="back-link" onclick="nav('home')">→ الرئيسية</button>
+    <div style="margin-bottom:16px">
+      <h2 style="font-size:24px;margin-bottom:6px">🎴 بطاقات المراجعة</h2>
+      <p style="color:var(--muted);font-size:14px">اضغطي البطاقة لقلبها</p>
+    </div>
+    <div class="flashcard-stage">
+      <div class="flashcard" id="flashcard" onclick="flipCard()">
+        <div class="fc-face fc-front" id="fcFront">...</div>
+        <div class="fc-face fc-back" id="fcBack">...</div>
+      </div>
+      <div style="display:flex;gap:10px;margin-top:20px">
+        <button class="btn btn-ghost" onclick="prevCard()">← السابق</button>
+        <button class="btn btn-primary" onclick="nextCard()">التالي →</button>
+      </div>
+      <p style="margin-top:12px;font-size:12px;color:var(--muted)" id="fcCounter">1 / 1</p>
+    </div>
+  </section>
+
+  <!-- ═══════ GLOSSARY ═══════ -->
+  <section class="view" id="view-glossary">
+    <button class="back-link" onclick="nav('home')">→ الرئيسية</button>
+    <div style="margin-bottom:16px">
+      <h2 style="font-size:24px;margin-bottom:6px">📚 قاموس المصطلحات</h2>
+      <p style="color:var(--muted);font-size:14px">أهم المصطلحات السياسية والاقتصادية</p>
+    </div>
+    <input type="text" class="search-input" placeholder="ابحثي عن مصطلح..." id="glossarySearch" oninput="filterGlossary()">
+    <div id="glossaryList"></div>
+  </section>
+
+  <!-- ═══════ POMODORO ═══════ -->
+  <section class="view" id="view-pomodoro">
+    <button class="back-link" onclick="nav('home')">→ الرئيسية</button>
+    <div style="margin-bottom:16px">
+      <h2 style="font-size:24px;margin-bottom:6px">🍅 مؤقت بومودورو</h2>
+      <p style="color:var(--muted);font-size:14px">ركزي 25 دقيقة، ثم استريحي 5</p>
+    </div>
+    <div class="pomodoro">
+      <div class="pomo-mode" id="pomoMode">وقت التركيز</div>
+      <div class="pomo-time" id="pomoTime">25:00</div>
+      <div class="pomo-actions">
+        <button class="btn btn-primary" id="pomoStart" onclick="pomoToggle()">▶ ابدأ</button>
+        <button class="btn btn-ghost" onclick="pomoReset()">↺ إعادة</button>
+      </div>
+      <p style="margin-top:16px;font-size:12px;color:var(--muted)" id="pomoCount">الجلسات المكتملة: 0</p>
+    </div>
+  </section>
+
+  <!-- ═══════ NOTES ═══════ -->
+  <section class="view" id="view-notes">
+    <button class="back-link" onclick="nav('home')">→ الرئيسية</button>
+    <div style="margin-bottom:16px">
+      <h2 style="font-size:24px;margin-bottom:6px">📝 ملاحظاتي</h2>
+      <p style="color:var(--muted);font-size:14px">اكتبي ملاحظاتك — تُحفظ تلقائياً</p>
+    </div>
+    <textarea class="note-area" id="noteInput" placeholder="اكتبي ملاحظتك هنا..."></textarea>
+    <button class="btn btn-primary btn-full" onclick="addNote()">+ إضافة ملاحظة</button>
+    <div style="margin-top:20px" id="notesList"></div>
+  </section>
+
+  <!-- ═══════ TASKS ═══════ -->
+  <section class="view" id="view-tasks">
+    <button class="back-link" onclick="nav('home')">→ الرئيسية</button>
+    <div style="margin-bottom:16px">
+      <h2 style="font-size:24px;margin-bottom:6px">✅ قائمة المهام</h2>
+      <p style="color:var(--muted);font-size:14px">نظمي مهامك الدراسية</p>
+    </div>
+    <div style="display:flex;gap:8px;margin-bottom:16px">
+      <input type="text" class="search-input" id="taskInput" placeholder="مهمة جديدة..." style="margin:0;flex:1" onkeypress="if(event.key==='Enter')addTask()">
+      <button class="btn btn-primary" onclick="addTask()">إضافة</button>
+    </div>
+    <div id="tasksList"></div>
+  </section>
+
+  <!-- ═══════ SEARCH ═══════ -->
+  <section class="view" id="view-search">
+    <button class="back-link" onclick="nav('home')">→ الرئيسية</button>
+    <div style="margin-bottom:16px">
+      <h2 style="font-size:24px;margin-bottom:6px">🔍 البحث الشامل</h2>
+      <p style="color:var(--muted);font-size:14px">ابحثي في كل محتوى المنصة</p>
+    </div>
+    <input type="text" class="search-input" placeholder="ابحثي عن درس أو مصطلح أو مفهوم..." id="globalSearch" oninput="doGlobalSearch()">
+    <div id="searchResults"></div>
+  </section>
+
+  <!-- ═══════ SETTINGS ═══════ -->
+  <section class="view" id="view-settings">
+    <button class="back-link" onclick="nav('home')">→ الرئيسية</button>
+    <div style="margin-bottom:16px">
+      <h2 style="font-size:24px;margin-bottom:6px">⚙️ الإعدادات</h2>
+    </div>
+    <div class="course-card" style="cursor:default">
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0">
+        <div>
+          <div class="cc-title">الوضع الليلي</div>
+          <div class="cc-sub">مريح للعين في الإضاءة المنخفضة</div>
+        </div>
+        <button class="icon-btn" onclick="toggleTheme()" id="settingsThemeBtn">🌙</button>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-top:1px solid var(--line);margin-top:8px;padding-top:16px">
+        <div>
+          <div class="cc-title">وضع التركيز</div>
+          <div class="cc-sub">إخفاء كل المشتتات</div>
+        </div>
+        <button class="btn btn-ghost btn-sm" onclick="toggleFocus()">تفعيل</button>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-top:1px solid var(--line);margin-top:8px;padding-top:16px">
+        <div>
+          <div class="cc-title">إعادة تعيين التقدم</div>
+          <div class="cc-sub">حذف كل بيانات التقدم والاختبارات</div>
+        </div>
+        <button class="btn btn-danger btn-sm" onclick="resetProgress()">حذف</button>
+      </div>
+    </div>
+    <div style="text-align:center;padding:24px;color:var(--muted);font-size:12px">
+      <p>جامعة سمية — SOMAYA UNIVERSITY</p>
+      <p style="margin-top:4px">© 2025 — جميع الحقوق محفوظة</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- ═══════════════ BOTTOM NAV ═══════════════ -->
+<nav class="bottom-nav" id="bottomNav"></nav>
+
+<!-- FAB -->
+<button class="fab-top" id="fabTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════
+   الجزء الأول: إدارة البيانات والتخزين
+   ═══════════════════════════════════════════════════════════ */
+const STORAGE_KEY = 'somaya_uni_v1';
+
+const defaultState = {
+  theme: 'light',
+  progress: {},      // {lessonId: true}
+  quizResults: {},   // {quizId: {score, total, date}}
+  notes: [],
+  tasks: [],
+  favoriteLessons: [],
+  pomodoroSessions: 0,
+  achievements: []
+};
+
+let state = loadState();
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) return {...defaultState, ...JSON.parse(raw)};
+  } catch(e) { console.warn('Storage error:', e); }
+  return {...defaultState};
+}
+
+function saveState() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch(e) { console.warn('Save error:', e); }
+}
+
+function toggleTheme() {
+  state.theme = state.theme === 'dark' ? 'light' : 'dark';
+  applyTheme();
+  saveState();
+}
+
+function applyTheme() {
+  document.body.classList.toggle('dark', state.theme === 'dark');
+  const btn = document.getElementById('themeBtn');
+  if (btn) btn.textContent = state.theme === 'dark' ? '☀️' : '🌙';
+  const sBtn = document.getElementById('settingsThemeBtn');
+  if (sBtn) sBtn.textContent = state.theme === 'dark' ? '☀️' : '🌙';
+}
+
+function toggleFocus() {
+  document.body.classList.toggle('focus-mode');
+  const active = document.body.classList.contains('focus-mode');
+  showToast(active ? '🎯 وضع التركيز مفعّل' : 'تم إنهاء وضع التركيز');
+}
+
+function resetProgress() {
+  if (!confirm('هل أنتِ متأكدة من حذف كل التقدم؟')) return;
+  state = {...defaultState, theme: state.theme};
+  saveState();
+  showToast('تم إعادة تعيين كل شيء');
+  renderAll();
+}
+
+/* ═══════════════════════════════════════════════════════════
+   الجزء الثاني: بيانات المنهج (دروس ومحتوى)
+   ═══════════════════════════════════════════════════════════ */
+
+// نستخدم JSON مُبني داخل الكود. سيتم حقن الدروس عبر دالة render
+const econUnits = [
+  { id: 'e1', title: 'المحور الأول: ماهية الاقتصاد السياسي', icon: '🧭', color: 'purple',
+    desc: 'التعريف، الموضوع، الأهداف، والعلاقة بالعلوم الأخرى' },
+  { id: 'e2', title: 'المحور الثاني: السياق التاريخي لتطور الحقل', icon: '📜', color: 'pink',
+    desc: 'من العصور القديمة إلى الاقتصاد السياسي المعاصر' },
+  { id: 'e3', title: 'المحور الثالث: العلاقة بين الاقتصاد والسياسة', icon: '⚖️', color: 'blue',
+    desc: 'السلطة والثروة، صناعة القرار، الأزمات' },
+  { id: 'e4', title: 'المحور الرابع: النظريات الأساسية', icon: '🏛️', color: 'amber',
+    desc: 'الكلاسيكية، الماركسية، الكينزية، النيوكلاسيكية، والمزيد' },
+  { id: 'e5', title: 'المحور الخامس: دور الدولة كمنظم اقتصادي', icon: '🏢', color: 'green',
+    desc: 'التنظيم، المنافسة، القطاع العام والخاص' },
+  { id: 'e6', title: 'المحور السادس: السياسات المالية والنقدية', icon: '💵', color: 'purple',
+    desc: 'الضرائب، الإنفاق، التضخم، الفائدة' },
+  { id: 'e7', title: 'المحور السابع: إعادة توزيع الثروة', icon: '📊', color: 'pink',
+    desc: 'العدالة الاقتصادية، الدعم، مكافحة الفقر' }
+];
+
+const methUnits = [
+  { id: 'm1', title: 'المحور الأول: العلم والمعرفة العلمية', icon: '🔍', color: 'purple',
+    desc: 'أنواع المعرفة، خصائص العلم، الموضوعية' },
+  { id: 'm2', title: 'المحور الثاني: النموذج المعرفي والتطور العلمي', icon: '🧠', color: 'pink',
+    desc: 'توماس كون، الثورة العلمية، Paradigm' },
+  { id: 'm3', title: 'المحور الثالث: البحث العلمي وتصنيفاته', icon: '📖', color: 'blue',
+    desc: 'الأنواع، المراحل، الكمي والنوعي' },
+  { id: 'm4', title: 'المحور الرابع: المفاهيم والنظريات', icon: '💡', color: 'amber',
+    desc: 'بناء المفاهيم، النظرية العلمية' },
+  { id: 'm5', title: 'المحور الخامس: المنهج والمنهجية', icon: '🧭', color: 'green',
+    desc: 'الوصفي، التاريخي، المقارن، وغيرها' },
+  { id: 'm6', title: 'المحور السادس: البحث عن الأدبيات', icon: '📚', color: 'purple',
+    desc: 'الدراسات السابقة، الفجوة البحثية' },
+  { id: 'm7', title: 'المحور السابع: التوثيق وبرامج المراجع', icon: '📝', color: 'pink',
+    desc: 'APA، Mendeley، Zotero، EndNote' },
+  { id: 'm8', title: 'المحور الثامن: الأسئلة البحثية والفروض', icon: '❓', color: 'blue',
+    desc: 'صياغة الأسئلة والفرضيات العلمية' },
+  { id: 'm9', title: 'المحور التاسع: طرح الأسئلة البحثية', icon: '🎯', color: 'amber',
+    desc: 'من الموضوع إلى الإشكالية' },
+  { id: 'm10', title: 'المحور العاشر: المتغيرات والعلاقات', icon: '🔗', color: 'green',
+    desc: 'المستقل، التابع، الوسيط، العلاقات' },
+  { id: 'm11', title: 'المحور الحادي عشر: الفروض العلمية', icon: '🧪', color: 'purple',
+    desc: 'الصياغة، الاختبار، الأخطاء الشائعة' }
+];
+
+// محتوى الدرس — دالة تُرجع HTML محتوى كل درس
+function getLessonContent(id) {
+  const C = {
+    'e1': `
+      <span class="lv-badge">💰 الاقتصاد السياسي — محور 1</span>
+      <h1 class="lv-title">ماهية الاقتصاد السياسي</h1>
+      <div class="lv-meta"><span>⏱️ 20 دقيقة</span><span>📖 درس شامل</span></div>
+
+      <div class="content-block">
+        <h3>🎯 أهداف الدرس</h3>
+        <ul>
+          <li>فهم مفهوم الاقتصاد السياسي لغوياً واصطلاحياً</li>
+          <li>التمييز بين الاقتصاد السياسي وعلم الاقتصاد</li>
+          <li>إدراك موضوع وأهداف هذا الحقل المعرفي</li>
+          <li>ربط المفاهيم بأمثلة واقعية من الجزائر والعالم</li>
+        </ul>
+      </div>
+
+      <div class="content-block">
+        <h3>1. التعريف اللغوي والاصطلاحي</h3>
+        <p>كلمة «اقتصاد» في اللغة العربية مشتقة من الفعل «قَصَدَ» أي توجّه واعتدل. ويُقال «قَصَدَ في معيشته» أي توسط ولم يسرف. أما في الاصطلاح الغربي فكلمة Economy مشتقة من اليونانية: <strong>Oikos</strong> (بيت) و<strong>Nomos</strong> (تدبير)، أي «تدبير شؤون البيت».</p>
+        <div class="def-box">
+          <div class="def-label">التعريف الاصطلاحي</div>
+          <p><strong>الاقتصاد السياسي</strong> هو العلم الذي يدرس العلاقات الاجتماعية للإنتاج والتوزيع والتبادل والاستهلاك، والروابط بين الظواهر الاقتصادية والسلطة السياسية في المجتمع.</p>
+        </div>
+        <div class="def-box">
+          <div class="def-label">التعريف الأكاديمي</div>
+          <p>هو حقل معرفي متعدد التخصصات يدرس التفاعل بين الاقتصاد والسياسة، وكيف تؤثر القوى الاقتصادية في القرار السياسي، وكيف تؤثر السياسة في توزيع الثروة والموارد.</p>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h3>2. موضوع الاقتصاد السياسي</h3>
+        <p>يهتم الاقتصاد السياسي بدراسة:</p>
+        <ul>
+          <li><strong>الإنتاج:</strong> كيف تُنتج الثروة؟ ومن يملك وسائل الإنتاج؟</li>
+          <li><strong>التوزيع:</strong> كيف تُوزع الثروة بين الطبقات والفئات؟</li>
+          <li><strong>التبادل:</strong> كيف تُنظَّم الأسواق والتجارة؟</li>
+          <li><strong>الاستهلاك:</strong> أنماط الاستهلاك وعلاقتها بالطبقات الاجتماعية</li>
+          <li><strong>العلاقة بين الدولة والسوق</strong></li>
+        </ul>
+      </div>
+
+      <div class="content-block">
+        <h3>3. أهداف دراسة الاقتصاد السياسي</h3>
+        <ol>
+          <li>فهم آلية عمل الاقتصاد وعلاقته بالسياسة</li>
+          <li>تحليل السياسات العامة (الضرائب، الدعم، الإنفاق)</li>
+          <li>تفسير الأزمات الاقتصادية وعلاقتها بالاستقرار السياسي</li>
+          <li>تقييم النماذج التنموية المختلفة</li>
+          <li>فهم توزيع الثروة والسلطة في المجتمع</li>
+        </ol>
+      </div>
+
+      <div class="content-block">
+        <h3>4. الفرق بين الاقتصاد السياسي وعلم الاقتصاد</h3>
+        <table class="compare-table">
+          <tr><th>وجه المقارنة</th><th>الاقتصاد السياسي</th><th>علم الاقتصاد</th></tr>
+          <tr><td>الاهتمام</td><td>العلاقة بين الاقتصاد والسياسة</td><td>الظواهر الاقتصادية بذاتها</td></tr>
+          <tr><td>المنهج</td><td>متعدد التخصصات</td><td>تحليلي رياضي</td></tr>
+          <tr><td>التركيز</td><td>الطبقات، السلطة، التوزيع</td><td>الكفاءة، الأسواق، السعر</td></tr>
+          <tr><td>الأيديولوجيا</td><td>حاضرة بقوة</td><td>يُفترض الحياد</td></tr>
+        </table>
+      </div>
+
+      <div class="content-block">
+        <h3>5. العلاقة بالعلوم السياسية</h3>
+        <p>الاقتصاد السياسي والعلوم السياسية يتكاملان: فالدولة تُنتج السياسات الاقتصادية، والاقتصاد يُشكّل توزيع القوة السياسية. مثل: كيف تُصمم ميزانية الدولة؟ من يتحكم في قرارات الاستثمار؟</p>
+        <div class="example-box">
+          <div class="ex-label">🌟 مثال تطبيقي</div>
+          <p>في الجزائر، قرار رفع الدعم عن الوقود عام 2016 هو قرار اقتصادي (تقليص عجز الميزانية) وسياسي (مواجهة احتجاجات اجتماعية). هذا هو جوهر الاقتصاد السياسي.</p>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h3>6. أهمية الاقتصاد السياسي</h3>
+        <p>يساعد في فهم:</p>
+        <ul>
+          <li>لماذا تزداد الفوارق بين الأغنياء والفقراء؟</li>
+          <li>لماذا تنجح بعض الدول في التنمية وتفشل أخرى؟</li>
+          <li>كيف تنشأ الأزمات المالية وكيف تؤثر سياسياً؟</li>
+          <li>ما حدود تدخل الدولة في الاقتصاد؟</li>
+        </ul>
+      </div>
+
+      <div class="content-block">
+        <h3>7. مفاهيم مرتبطة</h3>
+        <ul>
+          <li><strong>الدولة الاقتصادية:</strong> الدولة كممثل اقتصادي فاعل</li>
+          <li><strong>العلاقات الإنتاجية:</strong> العلاقات بين مالكي وسائل الإنتاج والعمال</li>
+          <li><strong>الطبقة الاجتماعية:</strong> فئة لها موقع متشابه في نظام الإنتاج</li>
+          <li><strong>السلطة:</strong> القدرة على التأثير في القرارات</li>
+          <li><strong>الثروة:</strong> تراكم الأصول والموارد</li>
+        </ul>
+      </div>
+
+      <div class="warn-box">
+        <div class="warn-label">⚠️ أخطاء شائعة</div>
+        <p>الخلط بين «الاقتصاد السياسي» و«السياسة الاقتصادية»: الأولى حقل علمي، والثانية مجموعة إجراءات حكومية.</p>
+      </div>
+
+      <div class="summary-box">
+        <h3 style="margin-bottom:10px;color:var(--royal)">📌 خلاصة أكاديمية</h3>
+        <p>الاقتصاد السياسي علم يدرس علاقة الاقتصاد بالسياسة والمجتمع، وموضوعه الإنتاج والتوزيع والتبادل، وهدفه فهم توزيع الثروة والسلطة. يختلف عن علم الاقتصاد بتركيزه على الأبعاد الاجتماعية والسياسية.</p>
+      </div>
+
+      <div class="content-block">
+        <h3>🔑 نقاط للحفظ</h3>
+        <ul>
+          <li>الاقتصاد السياسي = اقتصاد + سياسة + مجتمع</li>
+          <li>موضوعه: الإنتاج، التوزيع، التبادل، الاستهلاك</li>
+          <li>يختلف عن الاقتصاد الخالص بمنهجه متعدد التخصصات</li>
+          <li>يساعد في فهم الأزمات والسياسات العامة</li>
+        </ul>
+      </div>
+
+      <div class="content-block">
+        <h3>❓ أسئلة للمراجعة</h3>
+        <ol>
+          <li>ما الفرق بين التعريف اللغوي والاصطلاحي للاقتصاد؟</li>
+          <li>اذكري ثلاثة أهداف لدراسة الاقتصاد السياسي.</li>
+          <li>كيف يختلف الاقتصاد السياسي عن علم الاقتصاد؟</li>
+          <li>أعطي مثالاً جزائرياً يوضح تقاطع الاقتصاد والسياسة.</li>
+        </ol>
+      </div>
+
+      <div class="content-block">
+        <h3>📚 مراجع أكاديمية</h3>
+        <ul>
+          <li>مقدمة في الاقتصاد السياسي — أ. د. محمد دويدار (دار النهضة العربية)</li>
+          <li>الاقتصاد السياسي: مقدمة نقدية — Robert Gilpin, The Political Economy of International Relations</li>
+        </ul>
+      </div>
+    `,
+
+    'e2': `
+      <span class="lv-badge">💰 الاقتصاد السياسي — محور 2</span>
+      <h1 class="lv-title">السياق التاريخي لتطور الاقتصاد السياسي</h1>
+      <div class="lv-meta"><span>⏱️ 25 دقيقة</span><span>📖 درس شامل</span></div>
+
+      <div class="content-block">
+        <h3>🎯 أهداف الدرس</h3>
+        <ul>
+          <li>تتبع تطور الفكر الاقتصادي عبر العصور</li>
+          <li>معرفة أبرز المدارس والمفكرين</li>
+          <li>فهم الظروف التي أنتجت كل نظرية</li>
+        </ul>
+      </div>
+
+      <div class="content-block">
+        <h3>الخط الزمني لتطور الفكر الاقتصادي</h3>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-year">القرن 4 ق.م</div>
+            <div class="tl-title">الفكر الاقتصادي اليوناني</div>
+            <div class="tl-desc">أرسطو وأفلاطون تناولوا قضايا القيمة والملكية. أرسطو ميّز بين «الاقتصاد» (تدبير البيت) و«الربح» (التجارة).</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">العصور الوسطى</div>
+            <div class="tl-title">الفكر المدرسي</div>
+            <div class="tl-desc">تأثر بالفكر الديني. ابن خلدون في «المقدمة» (1377) قدّم تحليلاً رائداً للعصبية والاقتصاد والدورة الاقتصادية.</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">القرن 16-18</div>
+            <div class="tl-title">المدرسة التجارية (Mercantilism)</div>
+            <div class="tl-desc">الثروة = الذهب والفضة. تشجيع التصدير وتقييد الاستيراد. من روادها: Jean-Baptiste Colbert في فرنسا.</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">القرن 18</div>
+            <div class="tl-title">المدرسة الطبيعية (Physiocracy)</div>
+            <div class="tl-desc">فرانسوا كينيه: الأرض مصدر الثروة الحقيقي. «دعه يعمل» — Laissez-faire. أول من وضع جدولاً للدورة الاقتصادية.</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">1776</div>
+            <div class="tl-title">آدم سميث والكلاسيكية</div>
+            <div class="tl-desc">«ثروة الأمم» — اليد الخفية، تقسيم العمل، السوق الحر.</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">1817</div>
+            <div class="tl-title">ديفيد ريكاردو</div>
+            <div class="tl-desc">نظرية الميزة النسبية في التجارة الدولية، نظرية الريع.</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">1867</div>
+            <div class="tl-title">كارل ماركس</div>
+            <div class="tl-desc">«رأس المال» — تحليل نقدي للرأسمالية، نظرية القيمة-العمل، فائض القيمة، الصراع الطبقي.</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">1870s</div>
+            <div class="tl-title">المدرسة النيوكلاسيكية</div>
+            <div class="tl-desc">مارجيناليزم — القيمة تُحدد بالمنفعة الحدية. ألفريد مارشال، ليون والراس.</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">1936</div>
+            <div class="tl-title">جون مينارد كينز</div>
+            <div class="tl-desc">«النظرية العامة» — التدخل الحكومي لمواجهة البطالة والكساد بعد أزمة 1929.</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">1970s-الآن</div>
+            <div class="tl-title">الاقتصاد السياسي المعاصر</div>
+            <div class="tl-desc">النيوليبرالية، المؤسسية الجديدة، الاقتصاد السياسي الدولي (IPE)، اقتصاد المعرفة.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h3>تحليل كل مرحلة</h3>
+        <p><strong>المدرسة التجارية:</strong> ظهرت مع اكتشاف الأمريكتين ونهضة التجارة. ركّزت على أن قوة الدولة تقاس بما تملكه من ذهب وفضة. أنشأت شركات استعمارية مثل شركة الهند الشرقية. انتُقدت لأنها خلطت بين الثروة والنقد.</p>
+        <p><strong>المدرسة الطبيعية:</strong> ظهرت في فرنسا، رأت أن الزراعة هي المصدر الوحيد للثروة الحقيقية. صاحبها «الاقتصاديون». أهم إسهام: مفهوم «الدورة الاقتصادية».</p>
+        <p><strong>الكلاسيكية:</strong> ثورة صناعية في إنجلترا. آدم سميث: تقسيم العمل يضاعف الإنتاج. اليد الخفية: المصلحة الفردية تخدم المصلحة العامة.</p>
+        <p><strong>الماركسية:</strong> رد فعل على قسوة الرأسمالية في القرن 19. ماركس: الرأسمالية تحمل تناقضاتها في داخلها وستؤول إلى الاشتراكية.</p>
+        <p><strong>الكينزية:</strong> استجابة لأزمة 1929. الدولة يجب أن تتدخل لتحفيز الطلب الكلي.</p>
+      </div>
+
+      <div class="summary-box">
+        <h3 style="margin-bottom:10px;color:var(--royal)">📌 خلاصة</h3>
+        <p>تطور الاقتصاد السياسي يعكس صراعاً بين ثلاث رؤى: السوق الحر (الكلاسيكية والنيوكلاسيكية)، التدخل الحكومي (الكينزية)، والنقد الراديكالي (الماركسية). كل مرحلة جاءت رداً على أزمات المرحلة السابقة.</p>
+      </div>
+
+      <div class="content-block">
+        <h3>❓ أسئلة للمراجعة</h3>
+        <ol>
+          <li>ما الفكرة المركزية للمدرسة التجارية؟ ولماذا انتُقدت؟</li>
+          <li>كيف يختلف آدم سميث عن المدرسة التجارية؟</li>
+          <li>ما السياق الذي أنتج الكينزية؟</li>
+          <li>ما إسهام ابن خلدون في الفكر الاقتصادي؟</li>
+        </ol>
+      </div>
+    `,
+
+    'e3': `
+      <span class="lv-badge">💰 الاقتصاد السياسي — محور 3</span>
+      <h1 class="lv-title">العلاقة بين الاقتصاد والسياسة</h1>
+      <div class="lv-meta"><span>⏱️ 22 دقيقة</span><span>📖 درس شامل</span></div>
+
+      <div class="content-block">
+        <h3>🎯 أهداف الدرس</h3>
+        <ul>
+          <li>فهم التأثير المتبادل بين الاقتصاد والسياسة</li>
+          <li>تحليل علاقة السلطة بالثروة</li>
+          <li>أمثلة تطبيقية من الجزائر والعالم</li>
+        </ul>
+      </div>
+
+      <div class="content-block">
+        <h3>1. كيف تؤثر السياسة في الاقتصاد؟</h3>
+        <ul>
+          <li><strong>التشريع:</strong> قوانين الاستثمار، الضرائب، العمل</li>
+          <li><strong>الإنفاق العام:</strong> ميزانية الدولة توجه الاقتصاد</li>
+          <li><strong>السياسة النقدية:</strong> التحكم في عرض النقود والفائدة</li>
+          <li><strong>التنظيم:</strong> قواعد المنافسة وحماية المستهلك</li>
+          <li><strong>العلاقات الدولية:</strong> الاتفاقيات التجارية والعقوبات</li>
+        </ul>
+      </div>
+
+      <div class="content-block">
+        <h3>2. كيف يؤثر الاقتصاد في السياسة؟</h3>
+        <ul>
+          <li><strong>التمويل:</strong> اللوبيات والشركات تمول الحملات الانتخابية</li>
+          <li><strong>الإعلام:</strong> القوى الاقتصادية تملك وسائل إعلام تؤثر على الرأي العام</li>
+          <li><strong>الأزمات:</strong> البطالة والتضخم يؤديان لاضطرابات سياسية</li>
+          <li><strong>الطبقات:</strong> النخب الاقتصادية تؤثر في القرارات الحكومية</li>
+        </ul>
+      </div>
+
+      <div class="content-block">
+        <h3>3. علاقة السلطة بالثروة</h3>
+        <p>هناك علاقة جدلية دائمة بين من يملك الثروة ومن يملك السلطة. في بعض الأنظمة تندمج النخب الاقتصادية والسياسية في «نخبة واحدة». في أنظمة أخرى تتنافس. تاريخياً، من يتحكم في وسائل الإنتاج يستطيع التأثير في القرار السياسي.</p>
+        <div class="example-box">
+          <div class="ex-label">🌟 مثال جزائري</div>
+          <p>في الجزائر، العلاقة بين الدولة و«الرأسمالية الريعية» (المبنية على المحروقات) شكّلت بنية الاقتصاد السياسي منذ الاستقلال. سيطرة الدولة على الريع النفطي جعلت السلطة السياسية عنصراً مركزياً في الحياة الاقتصادية.</p>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h3>4. تأثير المصالح الاقتصادية في القرار</h3>
+        <p>في الديمقراطيات، اللوبيات (جمعيات الضغط) تؤثر في التشريعات: لوبي الصناعات الدوائية، لوبي السلاح، لوبي الطاقة. في الأنظمة غير الديمقراطية، النخب الاقتصادية المرتبطة بالسلطة تحصل على امتيازات (احتكارات، عقود عمومية).</p>
+      </div>
+
+      <div class="content-block">
+        <h3>5. تأثير الطبقات الاجتماعية</h3>
+        <p>مثال: في بريطانيا، الطبقة العاملة تدعم سياسات إعادة التوزيع (صحة مجانية، تعليم مجاني). الطبقة الوسطى العليا تدعم خفض الضرائب. التحليل الطبقي أساسي في الاقتصاد السياسي.</p>
+      </div>
+
+      <div class="content-block">
+        <h3>6. الأزمات الاقتصادية والاستقرار السياسي</h3>
+        <div class="example-box">
+          <div class="ex-label">🌍 مثال عالمي</div>
+          <p><strong>أزمة 2008:</strong> انهيار البنوك أدى إلى حركات احتجاج (حركة «احتلوا وول ستريت»، الربيع العربي جزئياً). <strong>أزمة كوفيد-19:</strong> أظهرت هشاشة الأنظمة الصحية وعلاقتها بالإنفاق العام.</p>
+        </div>
+        <div class="example-box">
+          <div class="ex-label">🇩🇿 مثال جزائري</div>
+          <p>انخفاض أسعار النفط 2014-2016 ضغط على الميزانية وأدى إلى قرارات تقشف أثارت توترات اجتماعية، خصوصاً مع مناقشة رفع الدعم.</p>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h3>7. الاقتصاد السياسي المحلي والدولي</h3>
+        <p><strong>محلياً:</strong> كيف توزع الدولة الموارد بين الجهات؟ (مثال: التنمية في الجنوب الجزائري).</p>
+        <p><strong>دولياً:</strong> كيف تؤثر المنظمات الدولية (صندوق النقد، البنك العالمي، WTO) في سياسات الدول النامية؟</p>
+      </div>
+
+      <div class="warn-box">
+        <div class="warn-label">⚠️ خطأ شائع</div>
+        <p>افتراض أن الاقتصاد منفصل عن السياسة، أو أن السياسة مجرد «أدوات» لتنفيذ الاقتصاد. العلاقة جدلية ومتبادلة.</p>
+      </div>
+
+      <div class="summary-box">
+        <h3 style="margin-bottom:10px;color:var(--royal)">📌 خلاصة</h3>
+        <p>الاقتصاد والسياسة متشابكان. السياسة تُشكّل الاقتصاد عبر التشريع والإنفاق، والاقتصاد يُشكّل السياسة عبر التمويل والتأثير والطبقات. فهم هذه العلاقة ضروري لتحليل أي ظاهرة اجتماعية.</p>
+      </div>
+
+      <div class="content-block">
+        <h3>❓ أسئلة للمراجعة</h3>
+        <ol>
+          <li>اذكري ثلاثة طرق تؤثر بها السياسة في الاقتصاد.</li>
+          <li>كيف يمكن لطبقة اجتماعية أن تؤثر في السياسة؟</li>
+          <li>لماذا تُعدّ الأزمات الاقتصادية محركاً للتحولات السياسية؟</li>
+        </ol>
+      </div>
+    `,
+
+    'e4': `
+      <span class="lv-badge">💰 الاقتصاد السياسي — محور 4</span>
+      <h1 class="lv-title">النظريات الأساسية في الاقتصاد السياسي</h1>
+      <div class="lv-meta"><span>⏱️ 30 دقيقة</span><span>📖 درس شامل</span></div>
+
+      <div class="content-block">
+        <h3>🎯 أهداف الدرس</h3>
+        <ul>
+          <li>التعرف على أشهر نظريات الاقتصاد السياسي</li>
+          <li>مقارنة افتراضات كل نظرية</li>
+          <li>فهم الانتقادات الموجهة لكل نظرية</li>
+        </ul>
+      </div>
+
+      <div class="content-block">
+        <h3>1. النظرية الكلاسيكية</h3>
+        <p><strong>تعريفها:</strong> المدرسة التي نشأت في نهاية القرن 18 وترى أن السوق الحر يحقق أفضل توزيع للموارد.</p>
+        <p><strong>ظروف ظهورها:</strong> الثورة الصناعية في إنجلترا، الحاجة لتحرير التجارة من القيود التجارية.</p>
+        <p><strong>روادها:</strong> آدم سميث (1723-1790)، ديفيد ريكاردو (1772-1823)، جان بابتيست ساي.</p>
+        <p><strong>افتراضاتها:</strong> اليد الخفية، المصلحة الفردية = المصلحة العامة، العرض يخلق الطلب (قانون ساي)، الحرية الاقتصادية.</p>
+        <p><strong>نظرتها للدولة:</strong> دولة حارسة (ليلية) — تقتصر على الأمن والعدالة.</p>
+        <p><strong>نظرتها للسوق:</strong> كفؤ ذاتي التنظيم.</p>
+        <p><strong>موقفها من التوزيع:</strong> التوزيع يخضع لقوانين السوق.</p>
+        <p><strong>الانتقادات:</strong> تجاهلت الفوارق الاجتماعية، لم تتنبأ بالأزمات (أزمة 1929).</p>
+        <div class="example-box">
+          <div class="ex-label">🌟 مثال</div>
+          <p>سياسات «التقشف» التي تُفرض على الدول النامية من صندوق النقد الدولي تستند جزئياً إلى رؤى كلاسيكية/نيوليبرالية.</p>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h3>2. النظرية الماركسية</h3>
+        <p><strong>تعريفها:</strong> نظرية نقدية ترى الرأسمالية نظاماً استغلالياً قائماً على فائض القيمة، ومصيرها الانهيار.</p>
+        <p><strong>ظروف ظهورها:</strong> قسوة الرأسمالية في القرن 19، الثورة الصناعية، البؤس العمالي.</p>
+        <p><strong>روادها:</strong> كارل ماركس (1818-1883)، فريدريك إنجلز، لاحقاً لينين وغرامشي.</p>
+        <p><strong>افتراضاتها:</strong> المادية التاريخية، الصراع الطبقي محرك التاريخ، العمل مصدر القيمة، فائض القيمة يُستَلب من العامل.</p>
+        <p><strong>نظرتها للدولة:</strong> أداة للطبقة المسيطرة (البرجوازية).</p>
+        <p><strong>نظرتها للسوق:</strong> سوق رأسمالي يحمل تناقضاته وسيؤول للاشتراكية.</p>
+        <p><strong>التوزيع:</strong> نظام غير عادل بطبيعته.</p>
+        <p><strong>الانتقادات:</strong> تجارب تطبيقية قادت لتوتاليتارية، لم تتنبأ بمرونة الرأسمالية.</p>
+        <div class="example-box">
+          <div class="ex-label">🌟 مثال</div>
+          <p>تحليل ماركس لـ«الأجور» و«الاستغلال» يظهر في نقد الشروط التي تفرضها الشركات المتعددة الجنسيات على عمال الدول النامية.</p>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h3>3. النظرية الكينزية</h3>
+        <p><strong>تعريفها:</strong> نظرية تؤكد ضرورة تدخل الدولة لتحقيق التوازن الاقتصادي ومواجهة البطالة.</p>
+        <p><strong>ظروف ظهورها:</strong> أزمة 1929، الكساد الكبير، فشل السياسات الكلاسيكية.</p>
+        <p><strong>روادها:</strong> جون مينارد كينز (1883-1946)، لاحقاً بول سamuelson.</p>
+        <p><strong>افتراضاتها:</strong> الطلب الكلي يحدد الإنتاج والتشغيل، الأسواق لا تُنظّم ذاتها دائماً.</p>
+        <p><strong>نظرتها للدولة:</strong> دولة متدخلة لتحفيز الاقتصاد (الإنفاق، الاستثمار العام).</p>
+        <p><strong>نظرتها للسوق:</strong> يحتاج تدخلاً وتنظيماً.</p>
+        <p><strong>التوزيع:</strong> يمكن تحسينه عبر سياسات مالية.</p>
+        <p><strong>الانتقادات:</strong> التضخم الركودي في السبعينيات أظهر حدود الكينزية.</p>
+        <div class="example-box">
+          <div class="ex-label">🌟 مثال</div>
+          <p>خطط التحفيز الحكومية في 2008-2009 (الولايات المتحدة، الصين) استندت إلى منطق كينزي.</p>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h3>4. النظرية النيوكلاسيكية</h3>
+        <p>تطور للكلاسيكية، تُركز على المنفعة الحدية وتوازن السوق. روادها: ألفريد مارشال، ليون والراس، ميلتون فريدمان (النقدية). تُدافع عن تدخل حكومي محدود.</p>
+      </div>
+
+      <div class="content-block">
+        <h3>5. الليبرالية الاقتصادية والنيوليبرالية</h3>
+        <p><strong>الليبرالية:</strong> حرية السوق + حماية الحريات الفردية. <strong>النيوليبرالية:</strong> تيار معاصر يدعو لتقليص الدولة، الخصخصة، تحرير الأسواق. تجسدت في «توافق واشنطن» (1989).</p>
+        <div class="example-box">
+          <div class="ex-label">🇩🇿 مثال جزائري</div>
+          <p>برامج الخصخصة والتقويم الهيكلي في الجزائر خلال التسعينيات (بإشراف صندوق النقد) انطلقت من رؤى نيوليبرالية.</p>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h3>6. النظرية المؤسسية</h3>
+        <p>تُؤكد أن «المؤسسات» (القوانين، الأعراف، التنظيمات) تحدد الأداء الاقتصادي. روادها: دوغلاس نورث، إلينور أوستروم. من مبادئها: جودة المؤسسات شرط للتنمية.</p>
+      </div>
+
+      <div class="content-block">
+        <h3>جدول مقارنة شامل</h3>
+        <table class="compare-table">
+          <tr><th>النظرية</th><th>الدولة</th><th>السوق</th><th>التوزيع</th><th>المنهج</th></tr>
+          <tr><td>الكلاسيكية</td><td>حارسة</td><td>فعال ذاتياً</td><td>سوقي</td><td>فردي</td></tr>
+          <tr><td>الماركسية</td><td>أداة طبقة</td><td>استغلالي</td><td>غير عادل</td><td>طبقي/جدلي</td></tr>
+          <tr><td>الكينزية</td><td>متدخلة</td><td>يحتاج تنظيماً</td><td>يُحسَّن بالسياسة</td><td>كلي</td></tr>
+          <tr><td>النيوكلاسيكية</td><td>محدودة</td><td>توازني</td><td>حسب الكفاءة</td><td>رياضي</td></tr>
+          <tr><td>النيوليبرالية</td><td>مقلَّصة</td><td>محرَّر</td><td>غير تدخلي</td><td>سوقي</td></tr>
+          <tr><td>المؤسسية</td><td>منظِّمة</td><td>يُحكَم بالمؤسسات</td><td>حسب القواعد</td><td>مؤسسي</td></tr>
+        </table>
+      </div>
+
+      <div class="summary-box">
+        <h3 style="margin-bottom:10px;color:var(--royal)">📌 خلاصة أكاديمية</h3>
+        <p>لا توجد نظرية واحدة «صحيحة». كل نظرية تعكس سياقها التاريخي وتركز على جانب من الواقع. الفهم الجيد يتطلب مقارنة الافتراضات والانتقادات، لا تبنّي نظرية واحدة بشكل مطلق.</p>
+      </div>
+
+      <div class="content-block">
+        <h3>❓ أسئلة للمراجعة</h3>
+        <ol>
+          <li>ما أوجه الشبه والاختلاف بين الكلاسيكية والنيوكلاسيكية؟</li>
+          <li>كيف تنظر الكينزية للدولة والسوق؟</li>
+          <li>ما الفرق بين الليبرالية والنيوليبرالية؟</li>
+          <li>اذكري مثالاً تطبيقياً لكل من الماركسية والكينزية.</li>
+        </ol>
+      </div>
+    `,
+
+    'e5': `
+      <span class="lv-badge">💰 الاقتصاد السياسي — محور 5</span>
+      <h1 class="lv-title">دور الدولة كمنظم اقتصادي</h1>
+      <div class="lv-meta"><span>⏱️ 25 دقيقة</span><span>📖 درس شامل</span></div>
+
+      <div class="content-block">
+        <h3>🎯 أهداف الدرس</h3>
+        <ul>
+          <li>فهم مفهوم «الدولة الاقتصادية»</li>
+          <li>تحديد أدوات الدولة في تنظيم السوق</li>
+          <li>معالجة إخفاقات السوق</li>
+          <li>أمثلة تطبيقية من الاقتصاد الجزائري</li>
+        </ul>
+      </div>
+
+      <div class="content-block">
+        <h3>1. مفهوم الدولة الاقتصادية</h3>
+        <p>هي الدولة التي تتجاوز دور «الحارس» لتكون فاعلاً اقتصادياً: منتجاً (عبر القطاع العام)، منظماً (عبر التشريع)، وموجهاً (عبر التخطيط والإنفاق).</p>
+        <div class="def-box">
+          <div class="def-label">تعريف</div>
+          <p>الدولة الاقتصادية: مجموع المؤسسات والآليات التي تتدخل من خلالها السلطة العامة في الحياة الاقتصادية بهدف تحقيق أهداف التنمية والعدالة.</p>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h3>2. دور الدولة في تنظيم الأسواق</h3>
+        <ul>
+          <li>وضع قواعد المنافسة</li>
+          <li>الرقابة على الأسعار في بعض القطاعات</li>
+          <li>حماية المستهلك</li>
+          <li>مكافحة الاحتكار</li>
+        </ul>
+      </div>
+
+      <div class="content-block">
+        <h3>3. حماية المنافسة</h3>
+        <p>مثال: مجلس المنافسة في الجزائر (قانون 2003) مهمته ضبط الممارسات التجارية ومنع الاحتكار. في الاتحاد الأوروبي، المفوضية الأوروبية تفرض غرامات على الشركات المحتكرة.</p>
+      </div>
+
+      <div class="content-block">
+        <h3>4. إخفاقات السوق</h3>
+        <p>السوق لا يحقق الكفاءة دائماً. حالات إخفاق السوق:</p>
+        <ul>
+          <li><strong>الاحتكار:</strong> شركة واحدة تتحكم بالسوق</li>
+          <li><strong>الخارجيات:</strong> التلوث مثال — تكلفة لا يتحملها المنتج</li>
+          <li><strong>السلع العامة:</strong> الدفاع، الأمن — لا يمكن للقطاع الخاص توفيرها بكفاءة</li>
+          <li><strong>المعلومات غير المتماثلة:</strong> البائع يعرف أكثر من المشتري</li>
+        </ul>
+        <div class="example-box">
+          <div class="ex-label">🌟 مثال</div>
+          <p>تدخل الدولة لتنظيم الأدوية (اختبار الجودة قبل التسويق) هو معالجة لعدم تماثل المعلومات بين المريض والشركة.</p>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h3>5. القطاع العام والقطاع الخاص</h3>
+        <table class="compare-table">
+          <tr><th>وجه المقارنة</th><th>القطاع العام</th><th>القطاع الخاص</th></tr>
+          <tr><td>الملكية</td><td>الدولة</td><td>الأفراد</td></tr>
+          <tr><td>الهدف</td><td>المصلحة العامة</td><td>الربح</td></tr>
+          <tr><td>الكفاءة</td><td>قد تكون أقل</td><td>عادة أعلى</td></tr>
+          <tr><td>التغطية</td><td>المناطق النائية</td><td>المناطق المربحة</td></tr>
+        </table>
+      </div>
+
+      <div class="content-block">
+        <h3>6. الخصخصة</h3>
+        <p>هي بيع أو نقل ملكية المؤسسات العمومية إلى القطاع الخاص. لها مؤيدون (كفاءة أعلى) ومعارضون (فقدان وظائف، تراجع الخدمات العامة).</p>
+        <div class="example-box">
+          <div class="ex-label">🇩🇿 مثال جزائري</div>
+          <p>في الجزائر، عرفت بعض المؤسسات العمومية عمليات خصخصة جزئية في قطاعات مثل الإسمنت والبنوك. لكن قطاعات استراتيجية (المحروقات، المياه، الكهرباء) بقيت تحت سيطرة الدولة.</p>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h3>7. التخطيط الاقتصادي</h3>
+        <p>هو توجيه الاقتصاد وفق أهداف محددة مسبقاً. أشكال:</p>
+        <ul>
+          <li><strong>تخطيط مركزي:</strong> الدولة تحدد كل شيء</li>
+          <li><strong>تخطيط إرشادي:</strong> الدولة تضع أهدافاً والأسواق تنفذ</li>
+          <li><strong>تخطيط استراتيجي:</strong> رؤى طويلة المدى</li>
+        </ul>
+      </div>
+
+      <div class="content-block">
+        <h3>8. تدخل الدولة وحدوده</h3>
+        <p>التدخل ضروري لكن له حدود:</p>
+        <ul>
+          <li>البيروقراطية والفساد</li>
+          <li>ضعف الكفاءة في المؤسسات العمومية</li>
+          <li>إضعاف المبادرة الخاصة</li>
+          <li>الأعباء المالية على الميزانية</li>
+        </ul>
+      </div>
+
+      <div class="warn-box">
+        <div class="warn-label">⚠️ خطأ شائع</div>
+        <p>اعتبار «تدخل الدولة» و«السوق الحر» نقيضين مطلقين. في الواقع كل اقتصاد حديث هو مزيج بينهما بنسب مختلفة.</p>
+      </div>
+
+      <div class="summary-box">
+        <h3 style="margin-bottom:10px;color:var(--royal)">📌 خلاصة</h3>
+        <p>الدولة الاقتصادية فاعل ضروري لتنظيم السوق وحماية المستهلك ومعالجة الإخفاقات. لكن دورها يجب أن يكون متوازناً مع المبادرة الخاصة، وإلا تحولت إلى عبء.</p>
+      </div>
+
+      <div class="content-block">
+        <h3>❓ أسئلة للمراجعة</h3>
+        <ol>
+          <li>ما المقصود بإخفاقات السوق؟ اذكري ثلاثة أمثلة.</li>
+          <li>ما الفرق بين القطاع العام والقطاع الخاص؟</li>
+          <li>ما إيجابيات وسلبيات الخصخصة؟</li>
+        </ol>
+      </div>
+    `,
+
+    'e6': `
+      <span class="lv-badge">💰 الاقتصاد السياسي — محور 6</span>
+      <h1 class="lv-title">السياسات المالية والنقدية</h1>
+      <div class="lv-meta"><span>⏱️ 28 دقيقة</span><span>📖 درس شامل</span></div>
+
+      <div class="content-block">
+        <h3>🎯 أهداف الدرس</h3>
+        <ul>
+          <li>فهم أدوات السياسة المالية والنقدية</li>
+          <li>التمييز بينهما والمقارنة بينهما</li>
+          <li>ربط السياسات بأمثلة تطبيقية</li>
+        </ul>
+      </div>
+
+      <div class="content-block">
+        <h3>أولاً: السياسة المالية</h3>
+        <div class="def-box">
+          <div class="def-label">تعريف</div>
+          <p>السياسة المالية (Fiscal Policy): استخدام الحكومة لأداتَي الإنفاق العام والضرائب للتأثير في النشاط الاقتصادي.</p>
+        </div>
+        <p><strong>أهدافها:</strong></p>
+        <ul>
+          <li>تحقيق النمو الاقتصادي</li>
+          <li>خفض البطالة</li>
+          <li>الحد من التضخم</li>
+          <li>إعادة توزيع الدخل</li>
+          <li>الاستقرار الاقتصادي</li>
+        </ul>
+        <p><strong>أدواتها:</strong></p>
+        <ul>
+          <li><strong>الضرائب:</strong> مباشرة (على الدخل والثروة) وغير مباشرة (على الاستهلاك مثل TVA)</li>
+          <li><strong>الإنفاق العام:</strong> جارٍ (رواتب، تسيير) واستثماري (مشاريع، بنية تحتية)</li>
+          <li><strong>الميزانية العامة:</strong> وثيقة تُقدّر إيرادات الدولة ونفقاتها السنوية</li>
+        </ul>
+        <p><strong>العجز والفائض:</strong> العجز = النفقات > الإيرادات. الفائض = العكس. العجز المزمن يؤدي لتزايد الدين العام.</p>
+        <p><strong>الدين العام:</strong> تراكم الاقتراض الحكومي لتغطية العجز. يُثقل الأجيال القادمة إذا لم يُوجَّه لاستثمار منتج.</p>
+        <p><strong>الآثار:</strong> سياسة توسعية (زيادة الإنفاق/خفض الضرائب) تحفز النمو لكن قد ترفع التضخم. سياسة انكماشية (عكس ذلك) تكافح التضخم لكن قد ترفع البطالة.</p>
+        <div class="example-box">
+          <div class="ex-label">🇩🇿 مثال جزائري</div>
+          <p>عانت الجزائر من عجز في الميزانية بعد 2014 بسبب انخفاض النفط. لجأت لسياسات ترشيد الإنفاق والاقتراض الداخلي والخارجي.</p>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h3>ثانياً: السياسة النقدية</h3>
+        <div class="def-box">
+          <div class="def-label">تعريف</div>
+          <p>السياسة النقدية (Monetary Policy): إدارة البنك المركزي لعرض النقود وأسعار الفائدة لتحقيق أهداف اقتصادية.</p>
+        </div>
+        <p><strong>أهدافها:</strong> استقرار الأسعار، خفض البطالة، دعم النمو، استقرار سعر الصرف.</p>
+        <p><strong>دور البنك المركزي:</strong> يصدر النقود، يشرف على البنوك، يحدد سعر الفائدة الرئيسي. في الجزائر: بنك الجزائر.</p>
+        <p><strong>عرض النقود:</strong> كمية النقد المتداول في الاقتصاد. زيادته المفرطة تسبب التضخم.</p>
+        <p><strong>التضخم:</strong> ارتفاع مستمر في المستوى العام للأسعار. يقيسه مؤشر أسعار الاستهلاك.</p>
+        <p><strong>أسعار الفائدة:</strong> تكلفة الاقتراض. رفعها يكافح التضخم ويبطئ الاقتصاد. خفضها يحفز الاستثمار.</p>
+        <p><strong>أدوات السياسة النقدية:</strong></p>
+        <ul>
+          <li>سعر الفائدة الرئيسي (إعادة الخصم)</li>
+          <li>الاحتياطي الإلزامي للبنوك</li>
+          <li>عمليات السوق المفتوحة (شراء/بيع سندات)</li>
+        </ul>
+      </div>
+
+      <div class="content-block">
+        <h3>ثالثاً: مقارنة شاملة</h3>
+        <table class="compare-table">
+          <tr><th>وجه المقارنة</th><th>السياسة المالية</th><th>السياسة النقدية</th></tr>
+          <tr><td>الجهة المسؤولة</td><td>الحكومة/البرلمان</td><td>البنك المركزي</td></tr>
+          <tr><td>الأدوات</td><td>الضرائب، الإنفاق</td><td>عرض النقود، الفائدة</td></tr>
+          <tr><td>السرعة</td><td>أبطأ (تشريع)</td><td>أسرع (قرار إداري)</td></tr>
+          <tr><td>الأثر</td><td>مباشر على الطلب</td><td>غير مباشر عبر البنوك</td></tr>
+          <tr><td>الهدف الأساسي</td><td>النمو والعدالة</td><td>الاستقرار النقدي</td></tr>
+        </table>
+      </div>
+
+      <div class="summary-box">
+        <h3 style="margin-bottom:10px;color:var(--royal)">📌 خلاصة</h3>
+        <p>السياسة المالية تعمل عبر الميزانية والضرائب، والسياسة النقدية عبر النقود والفائدة. كلتاهما أدوات لإدارة الاقتصاد، لكن لكل منهما حدود وأدوار.</p>
+      </div>
+
+      <div class="content-block">
+        <h3>❓ أسئلة للمراجعة</h3>
+        <ol>
+          <li>ما الفرق بين الضرائب المباشرة وغير المباشرة؟</li>
+          <li>كيف يؤثر رفع سعر الفائدة على الاقتصاد؟</li>
+          <li>لماذا يُعدّ استقلال البنك المركزي مهماً؟</li>
+        </ol>
+      </div>
+    `,
+
+    'e7': `
+      <span class="lv-badge">💰 الاقتصاد السياسي — محور 7</span>
+      <h1 class="lv-title">دور الدولة في إعادة توزيع الثروة</h1>
+      <div class="lv-meta"><span>⏱️ 24 دقيقة</span><span>📖 درس شامل</span></div>
+
+      <div class="content-block">
+        <h3>🎯 أهداف الدرس</h3>
+        <ul>
+          <li>فهم مفهوم إعادة توزيع الثروة والدخل</li>
+          <li>التمييز بين العدالة الاقتصادية والاجتماعية</li>
+          <li>معرفة أدوات الدولة لإعادة التوزيع</li>
+        </ul>
+      </div>
+
+      <div class="content-block">
+        <h3>1. مفهوم إعادة التوزيع</h3>
+        <div class="def-box">
+          <div class="def-label">تعريف</div>
+          <p>إعادة توزيع الثروة والدخل: مجموعة السياسات الحكومية التي تهدف لتقليص الفوارق بين الفئات الاجتماعية عبر نقل الموارد من الأغنياء إلى الفقراء أو تقديم خدمات مجانية للجميع.</p>
+        </div>
+        <p><strong>الفرق بين توزيع الدخل وتوزيع الثروة:</strong></p>
+        <ul>
+          <li>الدخل = ما يكسبه الفرد سنوياً (راتب، أرباح)</li>
+          <li>الثروة = تراكم الأصول (عقارات، أسهم، مدخرات)</li>
+        </ul>
+        <p>الثروة أكثر تركّزاً من الدخل، لأنها تتراكم عبر الأجيال.</p>
+      </div>
+
+      <div class="content-block">
+        <h3>2. العدالة الاقتصادية والاجتماعية</h3>
+        <ul>
+          <li><strong>العدالة الاقتصادية:</strong> تكافؤ الفرص، وصول عادل للموارد</li>
+          <li><strong>العدالة الاجتماعية:</strong> ضمان حد أدنى من الرفاهية للجميع (صحة، تعليم، سكن)</li>
+        </ul>
+      </div>
+
+      <div class="content-block">
+        <h3>3. أدوات إعادة التوزيع</h3>
+        <ul>
+          <li><strong>الضرائب التصاعدية:</strong> من يربح أكثر يدفع أكثر</li>
+          <li><strong>الدعم الاجتماعي:</strong> دعم المواد الأساسية (خبز، حليب، وقود)</li>
+          <li><strong>التحويلات الاجتماعية:</strong> منح للفقراء والعاطلين والمعاقين</li>
+          <li><strong>الخدمات العامة:</strong> صحة وتعليم مجانيان</li>
+          <li><strong>برامج مكافحة الفقر:</strong> مثل برامج التشغيل والتمكين الاقتصادي</li>
+        </ul>
+      </div>
+
+      <div class="content-block">
+        <h3>4. تحديات إعادة التوزيع</h3>
+        <ul>
+          <li>تهرب الأثرياء من الضرائب</li>
+          <li>ضعف كفاءة أجهزة التحصيل</li>
+          <li>الدعم قد يستفيد منه غير المستحقين</li>
+          <li>احتمال تأثير سلبي على الاستثمار</li>
+          <li>الفساد في توزيع المساعدات</li>
+        </ul>
+      </div>
+
+      <div class="content-block">
+        <h3>5. أمثلة من الجزائر</h3>
+        <div class="example-box">
+          <div class="ex-label">🇩🇿 أدوات إعادة توزيع في الجزائر</div>
+          <ul>
+            <li><strong>صندوق الضمان الاجتماعي (CNAS):</strong> تغطية صحية</li>
+            <li><strong>منحة البطالة:</strong> أُقرت عام 2022 لدعم الشباب العاطل</li>
+            <li><strong>دعم المواد الأساسية:</strong> عبر تعويض الفارق في الأسعار (خبز، سميد، حليب)</li>
+            <li><strong>برامج السكن الاجتماعي:</strong> توزيع سكنات على الأسر محدودة الدخل</li>
+            <li><strong>الضريبة على الثروة:</strong> ضرائب على العقارات والممتلكات الكبيرة</li>
+          </ul>
+        </div>
+        <div class="example-box">
+          <div class="ex-label">🌍 مثال عالمي</div>
+          <p>في الدول الإسكندنافية (السويد، النرويج)، تُطبَّق ضرائب تصاعدية عالية (قد تصل 50%)، مقابل خدمات عامة متميزة (تعليم، صحة، نقل).</p>
+        </div>
+      </div>
+
+      <div class="warn-box">
+        <div class="warn-label">⚠️ ملاحظة هامة</div>
+        <p>المقصود «إعادة توزيع الثروة» وليس إعادة توزيع الطلبة أو الأفراد. الفرق كبير: الأولى سياسة اقتصادية، والثانية قد تكون إجراءً إدارياً لا علاقة له بالاقتصاد السياسي.</p>
+      </div>
+
+      <div class="summary-box">
+        <h3 style="margin-bottom:10px;color:var(--royal)">📌 خلاصة</h3>
+        <p>إعادة التوزيع سياسة ضرورية لتحقيق العدالة الاجتماعية والاستقرار السياسي. تُنفَّذ عبر الضرائب والدعم والخدمات العامة. لكنها تواجه تحديات كالتهرب الضريبي وسوء توجيه الدعم، ما يستدعي حكامة جيدة.</p>
+      </div>
+
+      <div class="content-block">
+        <h3>❓ أسئلة للمراجعة</h3>
+        <ol>
+          <li>ما الفرق بين الدخل والثروة؟</li>
+          <li>اذكري ثلاث أدوات لإعادة التوزيع.</li>
+          <li>لماذا يُشكّل التهرب الضريبي تحدياً لإعادة التوزيع؟</li>
+          <li>أعطي مثالاً جزائرياً على سياسة إعادة توزيع.</li>
+        </ol>
+      </div>
+    `,
+
+    'm1': `
+      <span class="lv-badge">🔬 منهجية العلوم السياسية — محور 1</span>
+      <h1 class="lv-title">مفهوم العلم والمعرفة العلمية</h1>
+      <div class="lv-meta"><span>⏱️ 22 دقيقة</span><span>📖 درس شامل</span></div>
+
+      <div class="content-block">
+        <h3>🎯 أهداف الدرس</h3>
+        <ul>
+          <li>التمييز بين أنواع المعرفة</li>
+          <li>فهم خصائص المعرفة العلمية</li>
+          <li>إدراك طبيعة العلوم السياسية كحقل علمي</li>
+        </ul>
+      </div>
+
+      <div class="content-block">
+        <h3>1. مفهوم المعرفة</h3>
+        <div class="def-box">
+          <div class="def-label">تعريف</div>
+          <p>المعرفة: مجموع ما يدركه الإنسان عن العالم والحياة، عبر الحواس أو العقل أو النقل. هي علاقة بين الذات العارفة والموضوع المعروف.</p>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h3>2. أنواع المعرفة</h3>
+        <p><strong>أ) المعرفة العامية (الشائعة):</strong> تنتقل بالعادة والتجربة اليومية. ليست منظمة ولا مُدقَّقة. مثال: «الوقت من ذهب» أو معرفة أن النار تحرق.</p>
+        <p><strong>ب) المعرفة الفلسفية:</strong> تأمل عقلي في الوجود والحقيقة. تبحث في الأسئلة الكبرى (لماذا نحن موجودون؟). منهجها عقلي تأملي.</p>
+        <p><strong>ج) المعرفة الدينية:</strong> مصدرها الوحي والنقل. تؤمن بحقائق غيبية لا تُختبر تجريبياً.</p>
+        <p><strong>د) المعرفة العلمية:</strong> تُبنى على الملاحظة والاختبار والاستدلال المنظم. قابلة للتحقق والمراجعة والتكذيب.</p>
+      </div>
+
+      <div class="content-block">
+        <h3>3. مفهوم العلم وخصائصه</h3>
+        <div class="def-box">
+          <div class="def-label">تعريف</div>
+          <p>العلم: منظومة معارف منظمة تُبنى بمنهج دقيق لدراسة ظواهر محددة، بهدف الوصول لقوانين وتفسيرات موضوعية.</p>
+        </div>
+        <p><strong>خصائص المعرفة العلمية:</strong></p>
+        <ul>
+          <li><strong>الموضوعية:</strong> الانطلاق من الواقع لا من الأهواء</li>
+          <li><strong>الدقة:</strong> تحديد المفاهيم والإجراءات بوضوح</li>
+          <li><strong>التراكمية:</strong> كل بحث يبني على ما قبله</li>
+          <li><strong>التنظيم:</strong> معرفة منظمة لا شذرية</li>
+          <li><strong>قابلية التحقق:</strong> يمكن التحقق منها بالملاحظة أو الاختبار</li>
+          <li><strong>القابلية للتكذيب:</strong> حسب بوبر — أي نظرية يجب أن تكون قابلة للتكذيب ليكون لها معنى علمي</li>
+        </ul>
+      </div>
+
+      <div class="content-block">
+        <h3>4. الفرق بين العلم والمعرفة</h3>
+        <p>العلم نوع من المعرفة، لكنه أكثر تنظيماً وصرامة. كل علم معرفة، لكن ليست كل معرفة علماً.</p>
+      </div>
+
+      <div class="content-block">
+        <h3>5. طبيعة العلوم السياسية</h3>
+        <p>هل العلوم السياسية علم حقيقي؟ نعم، لكن بخصوصية: موضوعها (السلطة، الدولة، العلاقات) معقد ومتغير، ولا يمكن إجراء تجارب معملية. لذلك تعتمد على المناهج التأويلية والوصفية والمقارنة أكثر من التجريبية الصارمة.</p>
+        <div class="example-box">
+          <div class="ex-label">🌟 مثال</div>
+          <p>عند دراسة ظاهرة «الانتخابات»، لا يمكن للباحث عزل المتغيرات كطبيب في مختبر. فيستخدم المقارنة بين انتخابات دول مختلفة، وتحليل النتائج.</p>
+        </div>
+      </div>
+
+      <div class="summary-box">
+        <h3 style="margin-bottom:10px;color:var(--royal)">📌 خلاصة</h3>
+        <p>المعرفة أنواع، والعلم نوع خاص منها. العلوم السياسية علم اجتماعي بخصائص موضوعية تتطلب مناهج مناسبة. الموضوعية والدقة والتراكمية والتكذيب أسس البحث العلمي.</p>
+      </div>
+
+      <div class="content-block">
+        <h3>❓ أسئلة للمراجعة</h3>
+        <ol>
+          <li>ما الفرق بين المعرفة العامية والعلمية؟</li>
+          <li>اذكري ثلاث خصائص للعلم.</li>
+          <li>هل العلوم السياسية علم؟ عللي.</li>
+        </ol>
+      </div>
+    `,
+
+    'm2': `
+      <span class="lv-badge">🔬 منهجية العلوم السياسية — محور 2</span>
+      <h1 class="lv-title">النموذج المعرفي والتطور العلمي</h1>
+      <div class="lv-meta"><span>⏱️ 20 دقيقة</span><span>📖 درس شامل</span></div>
+
+      <div class="content-block">
+        <h3>🎯 أهداف الدرس</h3>
+        <ul>
+          <li>فهم مفهوم «النموذج المعرفي» Paradigm</li>
+          <li>معرفة نظرية توماس كون في الثورة العلمية</li>
+          <li>التمييز بين التفسير والفهم في العلوم الاجتماعية</li>
+        </ul>
+      </div>
+
+      <div class="content-block">
+        <h3>1. مفهوم Paradigm</h3>
+        <div class="def-box">
+          <div class="def-label">تعريف</div>
+          <p>النموذج المعرفي (Paradigm): إطار نظري شامل يحدد الافتراضات والمناهج والمفاهيم التي يعتمدها مجتمع علمي معين في دراسة ظواهره.</p>
+        </div>
+        <p>كل علم يعمل داخل نموذج معرفي. مثال: علم الفلك قبل كوبرنيكوس كان داخل نموذج «مركزية الأرض»، وبعده انتقل لنموذج «مركزية الشمس».</p>
+      </div>
+
+      <div class="content-block">
+        <h3>2. توماس كون والثورة العلمية</h3>
+        <p>توماس كون (Thomas Kuhn) في كتابه «بنية الثورات العلمية» (1962) قدّم تصوراً جديداً لتطور العلم:</p>
+        <ul>
+          <li><strong>العلم الطبيعي (Normal Science):</strong> عمل داخل نموذج معرفي مستقر</li>
+          <li><strong>الشذوذات (Anomalies):</strong> ظواهر لا يستطيع النموذج تفسيرها</li>
+          <li><strong>الأزمة:</strong> تراكم الشذوذات يخلق أزمة</li>
+          <li><strong>الثورة العلمية:</strong> استبدال النموذج القديم بآخر جديد</li>
+        </ul>
+        <div class="example-box">
+          <div class="ex-label">🌟 مثال</div>
+          <p>الانتقال من النموذج البطلمي (الأرض مركز الكون) إلى النموذج الكوبرنيكي (الشمس مركز النظام) هو ثورة علمية بمعنى كون.</p>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h3>3. العلم الطبيعي والعلم الاجتماعي</h3>
+        <table class="compare-table">
+          <tr><th>وجه المقارنة</th><th>العلوم الطبيعية</th><th>العلوم الاجتماعية</th></tr>
+          <tr><td>الموضوع</td><td>ظواهر طبيعية</td><td>ظواهر إنسانية</td></tr>
+          <tr><td>المنهج</td><td>تجريبي</td><td>تأويلي/مقارن</td></tr>
+          <tr><td>القابلية للتكرار</td><td>عالية</td><td>محدودة</td></tr>
+          <tr><td>الحياد</td><td>ممكن</td><td>صعب</td></tr>
+        </table>
+      </div>
+
+      <div class="content-block">
+        <h3>4. الوضعية وما بعد الوضعية</h3>
+        <p><strong>الوضعية (Positivism):</strong> تيار يرى أن العلوم الاجتماعية يجب أن تحاكي العلوم الطبيعية في المنهج. رائده أوغست كونت.</p>
+        <p><strong>ما بعد الوضعية:</strong> تيار يرفض ذلك، ويؤكد أن الظواهر الاجتماعية لها معنى، ولا يمكن دراستها كالظواهر الطبيعية. رائده في العلوم الاجتماعية: ماكس فيبر.</p>
+      </div>
+
+      <div class="content-block">
+        <h3>5. التفسير والفهم</h3>
+        <ul>
+          <li><strong>التفسير (Erklären):</strong> إيجاد علاقات سببية — منهج العلوم الطبيعية</li>
+          <li><strong>الفهم (Verstehen):</strong> استيعاب المعنى الذاتي للفاعلين — منهج العلوم الاجتماعية عند فيبر</li>
+        </ul>
+      </div>
+
+      <div class="summary-box">
+        <h3 style="margin-bottom:10px;color:var(--royal)">📌 خلاصة</h3>
+        <p>العلم يتطور عبر نماذج معرفية. كون فسّر الثورة العلمية كتغيير للنموذج. العلوم الاجتماعية لها خصوصية تتطلب الفهم لا التفسير فقط.</p>
+      </div>
+
+      <div class="content-block">
+        <h3>❓ أسئلة للمراجعة</h3>
+        <ol>
+          <li>ما المقصود بـ Paradigm؟</li>
+          <li>كيف تحدث الثورة العلمية عند كون؟</li>
+          <li>ما الفرق بين التفسير والفهم؟</li>
+        </ol>
+      </div>
+    `,
+
+    'm3': `
+      <span class="lv-badge">🔬 منهجية العلوم السياسية — محور 3</span>
+      <h1 class="lv-title">البحث العلمي وتصنيف البحوث</h1>
+      <div class="lv-meta"><span>⏱️ 24 دقيقة</span><span>📖 درس شامل</span></div>
+
+      <div class="content-block">
+        <h3>🎯 أهداف الدرس</h3>
+        <ul>
+          <li>فهم مفهوم البحث العلمي وأهدافه</li>
+          <li>معرفة مراحل إنجاز البحث</li>
+          <li>تصنيف أنواع البحوث العلمية</li>
+        </ul>
+      </div>
+
+      <div class="content-block">
+        <h3>1. مفهوم البحث العلمي</h3>
+        <div class="def-box">
+          <div class="def-label">تعريف</div>
+          <p>البحث العلمي: عملية منظمة تهدف إلى اكتشاف حقائق جديدة أو تفسير ظواهر قائمة، بمنهج دقيق وأدوات موثوقة، للوصول إلى نتائج قابلة للتحقق.</p>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h3>2. أهدافه</h3>
+        <ul>
+          <li><strong>الوصف:</strong> وصف الظاهرة كما هي</li>
+          <li><strong>التفسير:</strong> فهم أسبابها</li>
+          <li><strong>التنبؤ:</strong> توقع ما سيحدث</li>
+          <li><strong>التحكم:</strong> التأثير في الظاهرة</li>
+        </ul>
+      </div>
+
+      <div class="content-block">
+        <h3>3. خصائصه</h3>
+        <ul>
+          <li>الموضوعية</li>
+          <li>المنهجية</li>
+          <li>الدقة</li>
+          <li>الأصالة</li>
+          <li>القابلية للتحقق</li>
+        </ul>
+      </div>
+
+      <div class="content-block">
+        <h3>4. مراحل إنجاز البحث</h3>
+        <ol>
+          <li>اختيار الموضوع</li>
+          <li>صياغة الإشكالية</li>
+          <li>مراجعة الأدبيات</li>
+          <li>صياغة الفروض</li>
+          <li>اختيار المنهج</li>
+          <li>جمع البيانات</li>
+          <li>تحليل البيانات</li>
+          <li>استخلاص النتائج</li>
+          <li>كتابة التقرير النهائي</li>
+        </ol>
+      </div>
+
+      <div class="content-block">
+        <h3>5. أنواع البحوث</h3>
+        <p><strong>حسب الهدف:</strong></p>
+        <ul>
+          <li><strong>بحوث نظرية:</strong> تطوير المعرفة النظرية</li>
+          <li><strong>بحوث تطبيقية:</strong> حل مشكلة عملية</li>
+        </ul>
+        <p><strong>حسب المنهج:</strong></p>
+        <ul>
+          <li><strong>كمية:</strong> أرقام وإحصاء (استبيانات)</li>
+          <li><strong>نوعية:</strong> كلمات ومعاني (مقابلات، ملاحظة)</li>
+        </ul>
+        <p><strong>حسب العمق:</strong></p>
+        <ul>
+          <li><strong>وصفية:</strong> تصف الظاهرة</li>
+          <li><strong>تحليلية:</strong> تحلل أسبابها</li>
+          <li><strong>استكشافية:</strong> تستكشف موضوعاً جديداً</li>
+          <li><strong>تفسيرية:</strong> تفسر العلاقات</li>
+        </ul>
+        <p><strong>حسب الشكل:</strong></p>
+        <ul>
+          <li><strong>البحث المقارن:</strong> مقارنة حالتين أو أكثر</li>
+          <li><strong>دراسة الحالة:</strong> تحليل معمق لحالة واحدة</li>
+        </ul>
+      </div>
+
+      <div class="content-block">
+        <h3>6. مصادر البيانات</h3>
+        <ul>
+          <li><strong>أولية:</strong> جمعها الباحث بنفسه (مقابلات، استبيانات)</li>
+          <li><strong>ثانوية:</strong> موجودة مسبقاً (كتب، إحصاءات رسمية)</li>
+        </ul>
+      </div>
+
+      <div class="example-box">
+        <div class="ex-label">🌟 مثال تطبيقي</div>
+        <p>باحث يدرس «أثر السياسات الضريبية على الفوارق الاجتماعية في الجزائر»:</p>
+        <ul>
+          <li>بحث تطبيقي (يحل مشكلة)</li>
+          <li>منهج كمي (بيانات إحصائية) + كيفي (مقابلات)</li>
+          <li>دراسة حالة الجزائر</li>
+          <li>بيانات أولية (مقابلات) وثانوية (إحصاءات الديوان الوطني)</li>
+        </ul>
+      </div>
+
+      <div class="summary-box">
+        <h3 style="margin-bottom:10px;color:var(--royal)">📌 خلاصة</h3>
+        <p>البحث العلمي عملية منظمة لها مراحل محددة. أنواعه متعددة حسب الهدف والمنهج والعمق. اختيار النوع يعتمد على طبيعة المشكلة.</p>
+      </div>
+
+      <div class="content-block">
+        <h3>❓ أسئلة للمراجعة</h3>
+        <ol>
+          <li>اذكري ثلاث مراحل من مراحل البحث العلمي.</li>
+          <li>ما الفرق بين البحث الكمي والنوعي؟</li>
+          <li>ما الفرق بين البيانات الأولية والثانوية؟</li>
+        </ol>
+      </div>
+    `,
+
+    'm4': `
+      <span class="lv-badge">🔬 منهجية العلوم السياسية — محور 4</span>
+      <h1 class="lv-title">المفاهيم والنظريات في البحث العلمي</h1>
+      <div class="lv-meta"><span>⏱️ 20 دقيقة</span><span>📖 درس شامل</span></div>
+
+      <div class="content-block">
+        <h3>1. المفهوم العلمي</h3>
+        <div class="def-box">
+          <div class="def-label">تعريف</div>
+          <p>المفهوم: تصور ذهني مجرد يعبر عن خصائص مشتركة بين ظواهر معينة. مثل: «الديمقراطية»، «السلطة»، «الطبقة».</p>
+        </div>
+        <p><strong>خصائصه:</strong> الوضوح، الدقة، القابلية للقياس، التجريد المعقول.</p>
+        <p><strong>بناء المفاهيم:</strong></p>
+        <ol>
+          <li>تحديد الظاهرة</li>
+          <li>استخلاص الخصائص المشتركة</li>
+          <li>صياغة التعريف</li>
+          <li>تحديد المؤشرات القابلة للقياس</li>
+        </ol>
+      </div>
+
+      <div class="content-block">
+        <h3>2. التعريف الاصطلاحي والإجرائي</h3>
+        <ul>
+          <li><strong>التعريف الاصطلاحي (المفاهيمي):</strong> شرح المعنى العام للمفهوم</li>
+          <li><strong>التعريف الإجرائي:</strong> تحديد كيفية قياس المفهوم في هذا البحث</li>
+        </ul>
+        <div class="example-box">
+          <div class="ex-label">🌟 مثال</div>
+          <p><strong>المفهوم:</strong> «المشاركة السياسية»</p>
+          <p><strong>اصطلاحي:</strong> انخراط المواطن في الشأن العام</p>
+          <p><strong>إجرائي:</strong> نسبة المواطنين الذين صوتوا في آخر انتخابات + عدد المشاركين في الأحزاب</p>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h3>3. النظرية العلمية</h3>
+        <div class="def-box">
+          <div class="def-label">تعريف</div>
+          <p>النظرية: مجموعة مترابطة من المفاهيم والفرضيات التي تفسر ظاهرة أو مجموعة ظواهر.</p>
+        </div>
+        <p><strong>خصائصها:</strong> الاتساق، القابلية للاختبار، القدرة التفسيرية، القابلية للتعميم.</p>
+        <p><strong>وظائفها:</strong></p>
+        <ul>
+          <li>الوصف</li>
+          <li>التفسير</li>
+          <li>التنبؤ</li>
+          <li>توجيه البحث</li>
+        </ul>
+      </div>
+
+      <div class="content-block">
+        <h3>4. الفرق بين المفهوم والمتغير والنظرية</h3>
+        <table class="compare-table">
+          <tr><th>العنصر</th><th>التعريف</th><th>مثال</th></tr>
+          <tr><td>المفهوم</td><td>تصور مجرد</td><td>الديمقراطية</td></tr>
+          <tr><td>المتغير</td><td>خاصية قابلة للقياس والتباين</td><td>درجة المشاركة الانتخابية</td></tr>
+          <tr><td>النظرية</td><td>تفسير مترابط لظاهرة</td><td>نظرية التحديث السياسي</td></tr>
+        </table>
+      </div>
+
+      <div class="content-block">
+        <h3>5. توظيف النظريات</h3>
+        <p>النظرية تُستخدم في البحث لـ:</p>
+        <ul>
+          <li>تأطير الإشكالية</li>
+          <li>بناء الفرضيات</li>
+          <li>تفسير النتائج</li>
+        </ul>
+        <div class="warn-box">
+          <div class="warn-label">⚠️ تنبيه</div>
+          <p>لا يجوز الانطلاق من نظرية ثم «تطويع» الواقع لها. الواقع هو الحكم.</p>
+        </div>
+      </div>
+
+      <div class="summary-box">
+        <h3 style="margin-bottom:10px;color:var(--royal)">📌 خلاصة</h3>
+        <p>المفهوم تصور، المتغير قياس، النظرية تفسير. الثلاثة متكاملة في البحث. التعريف الإجرائي جسر بين النظرية والقياس.</p>
+      </div>
+
+      <div class="content-block">
+        <h3>❓ أسئلة للمراجعة</h3>
+        <ol>
+          <li>ما الفرق بين التعريف الاصطلاحي والإجرائي؟</li>
+          <li>اذكري ثلاث وظائف للنظرية العلمية.</li>
+          <li>كيف يختلف المفهوم عن المتغير؟</li>
+        </ol>
+      </div>
+    `,
+
+    'm5': `
+      <span class="lv-badge">🔬 منهجية العلوم السياسية — محور 5</span>
+      <h1 class="lv-title">المنهج والمنهجية</h1>
+      <div class="lv-meta"><span>⏱️ 22 دقيقة</span><span>📖 درس شامل</span></div>
+
+      <div class="content-block">
+        <h3>1. الفرق بين المنهج والمنهجية</h3>
+        <div class="def-box">
+          <div class="def-label">المنهج</div>
+          <p>الطريق أو الأسلوب الذي يتبعه الباحث لدراسة ظاهرة.</p>
+        </div>
+        <div class="def-box">
+          <div class="def-label">المنهجية</div>
+          <p>العلم الذي يدرس المناهج وأسس اختيارها، أو الإطار العام للبحث.</p>
+        </div>
+        <p>باختصار: المنهج هو الأداة، والمنهجية هي علم الأدوات.</p>
+      </div>
+
+      <div class="content-block">
+        <h3>2. أشهر المناهج</h3>
+        <table class="compare-table">
+          <tr><th>المنهج</th><th>طبيعته</th><th>متى يُستخدم</th></tr>
+          <tr><td>الوصفي</td><td>يصف الظاهرة كما هي</td><td>دراسة واقع ظاهرة</td></tr>
+          <tr><td>التاريخي</td><td>يتتبع الظاهرة عبر الزمن</td><td>دراسة تطور مؤسسة أو فكر</td></tr>
+          <tr><td>المقارن</td><td>يقارن حالتين أو أكثر</td><td>دراسة أنظمة سياسية مختلفة</td></tr>
+          <tr><td>التحليلي</td><td>يفكك الظاهرة لأجزائها</td><td>تحليل نص أو خطاب</td></tr>
+          <tr><td>الاستقرائي</td><td>من الخاص إلى العام</td><td>بناء قانون من حالات</td></tr>
+          <tr><td>الاستنباطي</td><td>من العام إلى الخاص</td><td>تطبيق نظرية على حالة</td></tr>
+          <tr><td>دراسة الحالة</td><td>تحليل معمق لحالة</td><td>فهم تفصيلي لظاهرة</td></tr>
+          <tr><td>تحليل المضمون</td><td>تحليل نصوص كمياً/كيفياً</td><td>تحليل خطابات إعلامية</td></tr>
+        </table>
+      </div>
+
+      <div class="content-block">
+        <h3>3. المنهج الوصفي</h3>
+        <p>يصف الظاهرة بدقة: ما هي؟ كيف تحدث؟ من يمارسها؟ لا يفسر الأسباب فقط بل يصفها.</p>
+        <p>مثال: «وصف النظام الانتخابي في الجزائر».</p>
+      </div>
+
+      <div class="content-block">
+        <h3>4. المنهج التاريخي</h3>
+        <p>يتتبع الظاهرة في تطورها. يجمع بين الوصف والتحليل الزمني.</p>
+        <p>مثال: «تطور الحركة الوطنية الجزائرية من 1919 إلى 1954».</p>
+      </div>
+
+      <div class="content-block">
+        <h3>5. المنهج المقارن</h3>
+        <p>يقارن بين وحدتين أو أكثر لتحديد أوجه الشبه والاختلاف.</p>
+        <p>مثال: «مقارنة النظام الرئاسي الأمريكي والبرلماني البريطاني».</p>
+      </div>
+
+      <div class="content-block">
+        <h3>6. المنهج التحليلي</h3>
+        <p>يفكك الظاهرة إلى عناصرها لفهم بنيتها. يُستخدم كثيراً في تحليل الخطاب السياسي.</p>
+      </div>
+
+      <div class="content-block">
+        <h3>7. الاستقراء والاستنباط</h3>
+        <ul>
+          <li><strong>الاستقراء:</strong> الانتقال من الجزئيات إلى القاعدة العامة. مثال: بعد دراسة عدة ثورات نستنتج قوانين للثورات.</li>
+          <li><strong>الاستنباط:</strong> من القاعدة العامة إلى الحالة. مثال: تطبيق نظرية «الانتقال الديمقراطي» على حالة تونس.</li>
+        </ul>
+      </div>
+
+      <div class="content-block">
+        <h3>8. تحليل المضمون</h3>
+        <p>منهج لتحليل النصوص (خطابات، مقالات، برامج حزبية) لتحديد التكرارات والمعاني الكامنة. يمكن أن يكون كمياً (عدّ الكلمات) أو كيفياً (تحليل دلالي).</p>
+      </div>
+
+      <div class="content-block">
+        <h3>9. اختيار المنهج</h3>
+        <p>يُختار المنهج بناءً على:</p>
+        <ul>
+          <li>طبيعة الموضوع</li>
+          <li>طبيعة البيانات المتاحة</li>
+          <li>الإشكالية المطروحة</li>
+          <li>قدرات الباحث</li>
+        </ul>
+      </div>
+
+      <div class="summary-box">
+        <h3 style="margin-bottom:10px;color:var(--royal)">📌 خلاصة</h3>
+        <p>المنهج أداة، والمنهجية علم. لكل منهج استخداماته. الاختيار الصحيح للمنهج شرط لنجاح البحث.</p>
+      </div>
+
+      <div class="content-block">
+        <h3>❓ أسئلة للمراجعة</h3>
+        <ol>
+          <li>ما الفرق بين المنهج والمنهجية؟</li>
+          <li>متى نستخدم المنهج المقارن؟</li>
+          <li>ما الفرق بين الاستقراء والاستنباط؟</li>
+        </ol>
+      </div>
+    `,
+
+    'm6': `
+      <span class="lv-badge">🔬 منهجية العلوم السياسية — محور 6</span>
+      <h1 class="lv-title">مفهوم وكيفية البحث عن الأدبيات العلمية</h1>
+      <div class="lv-meta"><span>⏱️ 22 دقيقة</span><span>📖 درس شامل</span></div>
+
+      <div class="content-block">
+        <h3>1. مفهوم الأدبيات</h3>
+        <div class="def-box">
+          <div class="def-label">تعريف</div>
+          <p>الأدبيات العلمية: مجموع الأعمال المنشورة (كتب، مقالات، أطروحات) ذات الصلة بموضوع البحث.</p>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h3>2. أهمية المراجعة</h3>
+        <ul>
+          <li>تجنب تكرار ما أُنجز</li>
+          <li>تحديد الفجوة البحثية</li>
+          <li>بناء الإطار النظري</li>
+          <li>صقل الإشكالية</li>
+          <li>اختيار المنهج المناسب</li>
+        </ul>
+      </div>
+
+      <div class="content-block">
+        <h3>3. مصادر البحث</h3>
+        <ul>
+          <li><strong>الكتب الأكاديمية</strong> — أساسية للتأصيل النظري</li>
+          <li><strong>المقالات العلمية</strong> — أحدث ما نُشر</li>
+          <li><strong>الرسائل والأطروحات</strong> — بحوث معمقة</li>
+          <li><strong>قواعد البيانات:</strong> JSTOR, Google Scholar, Scopus, Cairn, Springer</li>
+          <li><strong>المجلات المحكمة</strong></li>
+        </ul>
+      </div>
+
+      <div class="content-block">
+        <h3>4. تقييم المصادر</h3>
+        <p>معايير التقييم:</p>
+        <ul>
+          <li>مصداقية الناشر</li>
+          <li>حداثة المصدر</li>
+          <li>منهجية البحث</li>
+          <li>مراجعة الأقران (Peer Review)</li>
+          <li>سمعة المؤلف</li>
+        </ul>
+      </div>
+
+      <div class="content-block">
+        <h3>5. الفجوة البحثية</h3>
+        <p>هي السؤال الذي لم يُجب عنه في الأدبيات، أو الجانب الذي لم يُدرَس بعد، أو القصور في الدراسات السابقة. تحديدها شرط أساسي لأصالة البحث.</p>
+        <div class="example-box">
+          <div class="ex-label">🌟 مثال</div>
+          <p>إذا كانت الدراسات السابقة تناولت «أثر السياسة المالية على النمو في الجزائر»، يمكن أن تكون الفجوة: «أثر السياسة المالية على الفوارق الاجتماعية في الجزائر بعد 2014» — زاوية جديدة.</p>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h3>6. خطوات البحث عن الأدبيات (تطبيق عملي)</h3>
+        <ol>
+          <li>صياغة كلمات مفتاحية محددة</li>
+          <li>البحث في قواعد البيانات</li>
+          <li>قراءة العناوين والملخصات</li>
+          <li>اختيار الدراسات الأكثر صلة</li>
+          <li>قراءة كاملة وملاحظة</li>
+          <li>تصنيف الدراسات حسب المحاور</li>
+          <li>كتابة مراجعة نقدية (لا تلخيص فقط)</li>
+        </ol>
+      </div>
+
+      <div class="content-block">
+        <h3>7. كيفية كتابة مراجعة أدبيات</h3>
+        <ul>
+          <li>مقدمة تحدد الموضوع والهدف</li>
+          <li>تنظيم الدراسات حسب المحاور لا حسب التسلسل الزمني فقط</li>
+          <li>ذكر نتائج كل دراسة</li>
+          <li>نقد منهجي</li>
+          <li>استخلاص الفجوة</li>
+          <li>ربطها بإشكالية البحث</li>
+        </ul>
+      </div>
+
+      <div class="summary-box">
+        <h3 style="margin-bottom:10px;color:var(--royal)">📌 خلاصة</h3>
+        <p>مراجعة الأدبيات أساس البحث. تُحدد الفجوة وتؤصل الإشكالية. تتطلب مصادر موثوقة وتنظيماً نقدياً.</p>
+      </div>
+
+      <div class="content-block">
+        <h3>❓ أسئلة للمراجعة</h3>
+        <ol>
+          <li>ما أهمية مراجعة الأدبيات؟</li>
+          <li>ما هي الفجوة البحثية؟</li>
+          <li>اذكري معايير تقييم المصادر.</li>
+        </ol>
+      </div>
+    `,
+
+    'm7': `
+      <span class="lv-badge">🔬 منهجية العلوم السياسية — محور 7</span>
+      <h1 class="lv-title">التوثيق وبرامج إدارة المراجع</h1>
+      <div class="lv-meta"><span>⏱️ 26 دقيقة</span><span>📖 درس شامل</span></div>
+
+      <div class="content-block">
+        <h3>1. مفهوم التوثيق</h3>
+        <div class="def-box">
+          <div class="def-label">تعريف</div>
+          <p>التوثيق العلمي: الإشارة الدقيقة إلى المصادر التي اعتمدها الباحث في بحثه، لتجنب الانتحال وتسهيل الرجوع إليها.</p>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h3>2. أنواع الاقتباس</h3>
+        <ul>
+          <li><strong>الاقتباس المباشر:</strong> نقل النص حرفياً بين علامتي تنصيص + توثيق</li>
+          <li><strong>الاقتباس غير المباشر:</strong> إعادة صياغة الفكرة بأسلوب الباحث + توثيق</li>
+          <li><strong>إعادة الصياغة (Paraphrase):</strong> صياغة نفس المعنى بكلمات مغايرة</li>
+        </ul>
+      </div>
+
+      <div class="content-block">
+        <h3>3. الانتحال العلمي</h3>
+        <p>هو نسبة عمل غيره لنفسه دون ذكر المصدر. أنواعه:</p>
+        <ul>
+          <li>انتحال كامل (نسخ بحث كامل)</li>
+          <li>انتحال جزئي (نسخ فقرات)</li>
+          <li>انتحال فكرة (سرقة نظرية)</li>
+          <li>انتحال ذاتي (نسخ من عمل سابق للباحث)</li>
+        </ul>
+        <div class="warn-box">
+          <div class="warn-label">⚠️ عقوبات</div>
+          <p>الانتحال يعرّض الباحث للفصل أو سحب الشهادة. في الجزائر، قانون 2021 يعاقب على الانتحال العلمي.</p>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h3>4. أنظمة التوثيق</h3>
+        <table class="compare-table">
+          <tr><th>النظام</th><th>التخصص</th><th>الطريقة</th></tr>
+          <tr><td>APA</td><td>العلوم الاجتماعية</td><td>(المؤلف، السنة، الصفحة)</td></tr>
+          <tr><td>Chicago</td><td>التاريخ والفلسفة</td><td>حواشي سفلية أو داخل النص</td></tr>
+          <tr><td>MLA</td><td>الآداب</td><td>(المؤلف، الصفحة)</td></tr>
+        </table>
+      </div>
+
+      <div class="content-block">
+        <h3>5. برامج إدارة المراجع</h3>
+        <p>تُستخدم لتنظيم المراجع وإنشاء الاقتباسات وقوائم المصادر تلقائياً.</p>
+
+        <h4 style="margin:12px 0 6px;font-weight:800">أ) Mendeley</h4>
+        <ul>
+          <li>مجاني (Plan Basic)، محبوب لدى طلبة العلوم الاجتماعية</li>
+          <li>يتضمن قارئ PDF مدمج</li>
+          <li>إضافة إلى Word</li>
+          <li>يُتيح تصدير أنماط توثيق متعددة (APA, Chicago...)</li>
+        </ul>
+
+        <h4 style="margin:12px 0 6px;font-weight:800">ب) Zotero</h4>
+        <ul>
+          <li>مفتوح المصدر ومجاني بالكامل</li>
+          <li>إضافة المتصفح تلتقط المراجع بضغطة واحدة</li>
+          <li>تنظيم المجموعات والوسوم</li>
+          <li>حفظ ملفات PDF</li>
+        </ul>
+
+        <h4 style="margin:12px 0 6px;font-weight:800">ج) EndNote</h4>
+        <ul>
+          <li>مُتخصصي (غير مجاني)</li>
+          <li>يُستخدم بكثرة في العلوم الطبية والعلوم الطبيعية</li>
+          <li>ميزات متقدمة للتنسيق</li>
+          <li>يتطلب اشتراكاً</li>
+        </ul>
+
+        <table class="compare-table">
+          <tr><th>الميزة</th><th>Mendeley</th><th>Zotero</th><th>EndNote</th></tr>
+          <tr><td>السعر</td><td>مجاني أساسي</td><td>مجاني كلياً</td><td>مدفوع</td></tr>
+          <tr><td>سهولة</td><td>متوسطة</td><td>سهل جداً</td><td>متوسط</td></tr>
+          <tr><td>PDF</td><td>ممتاز</td><td>جيد</td><td>ممتاز</td></tr>
+          <tr><td>مفتوح المصدر</td><td>لا</td><td>نعم</td><td>لا</td></tr>
+        </table>
+      </div>
+
+      <div class="summary-box">
+        <h3 style="margin-bottom:10px;color:var(--royal)">📌 خلاصة</h3>
+        <p>التوثيق واجب علمي وأخلاقي. الانتحال جريمة أكاديمية. برامج إدارة المراجع تُسهّل العمل لكن لا تُغني عن الفهم.</p>
+      </div>
+
+      <div class="content-block">
+        <h3>❓ أسئلة للمراجعة</h3>
+        <ol>
+          <li>ما الفرق بين الاقتباس المباشر وغير المباشر؟</li>
+          <li>اذكري أنواع الانتحال العلمي.</li>
+          <li>قارني بين Zotero وMendeley.</li>
+        </ol>
+      </div>
+    `,
+
+    'm8': `
+      <span class="lv-badge">🔬 منهجية العلوم السياسية — محور 8</span>
+      <h1 class="lv-title">الأسئلة البحثية وصياغة الفروض العلمية</h1>
+      <div class="lv-meta"><span>⏱️ 24 دقيقة</span><span>📖 درس شامل</span></div>
+
+      <div class="content-block">
+        <h3>1. السؤال البحثي</h3>
+        <div class="def-box">
+          <div class="def-label">تعريف</div>
+          <p>السؤال البحثي: استفهام محدد يصوغه الباحث ليقود بحثه نحو إجابة علمية.</p>
+        </div>
+        <p><strong>خصائص السؤال الجيد:</strong></p>
+        <ul>
+          <li>واضح ومحدد</li>
+          <li>قابل للبحث (توجد له إجابة)</li>
+          <li>مرتبط بالموضوع</li>
+          <li>غير مركّب (سؤال واحد لا عدة أسئلة في سؤال)</li>
+          <li>يستخدم مفاهيم محددة</li>
+        </ul>
+      </div>
+
+      <div class="content-block">
+        <h3>2. أنواع الأسئلة البحثية</h3>
+        <ul>
+          <li><strong>وصفي:</strong> «ما هو النظام الانتخابي في الجزائر؟»</li>
+          <li><strong>تفسيري:</strong> «لماذا ارتفعت نسبة العزوف الانتخابي في 2019؟»</li>
+          <li><strong>مقارن:</strong> «ما الفرق بين النظام الانتخابي الجزائري والتونسي؟»</li>
+          <li><strong>استكشافي:</strong> «كيف يتفاعل الشباب الجزائري مع السياسة عبر وسائل التواصل؟»</li>
+        </ul>
+      </div>
+
+      <div class="content-block">
+        <h3>3. من السؤال الرئيسي إلى الفرعي</h3>
+        <div class="example-box">
+          <div class="ex-label">🌟 مثال</div>
+          <p><strong>الموضوع:</strong> أثر السياسات النقدية على التضخم في الجزائر</p>
+          <p><strong>السؤال الرئيسي:</strong> ما أثر السياسات النقدية على معدل التضخم في الجزائر (2010-2023)؟</p>
+          <p><strong>الأسئلة الفرعية:</strong></p>
+          <ul>
+            <li>ما الأدوات النقدية المستخدمة في الجزائر؟</li>
+            <li>كيف تطور معدل التضخم خلال الفترة؟</li>
+            <li>ما العلاقة بين سعر الفائدة والتضخم؟</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h3>4. الفرضية العلمية</h3>
+        <div class="def-box">
+          <div class="def-label">تعريف</div>
+          <p>الفرضية: تفسير مؤقت للعلاقة بين متغيرين، يُختبَر بالبيانات.</p>
+        </div>
+        <p><strong>خصائص الفرضية الجيدة:</strong> محددة، قابلة للاختبار، مرتبطة بالنظرية، موجزة، تفسيرية للعلاقة.</p>
+        <p><strong>أنواع الفروض:</strong></p>
+        <ul>
+          <li><strong>الفرضية الصفرية (H0):</strong> تنص على عدم وجود علاقة</li>
+          <li><strong>الفرضية البديلة (H1):</strong> تنص على وجود علاقة</li>
+          <li><strong>الفرضية الاتجاهية:</strong> تحدد اتجاه العلاقة (طردية/عكسية)</li>
+          <li><strong>غير الاتجاهية:</strong> تذكر وجود علاقة دون تحديد اتجاه</li>
+        </ul>
+        <div class="example-box">
+          <div class="ex-label">🌟 مثال</div>
+          <p><strong>H0:</strong> لا توجد علاقة ذات دلالة بين سعر الفائدة والتضخم</p>
+          <p><strong>H1:</strong> توجد علاقة عكسية ذات دلالة بين سعر الفائدة والتضخم</p>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h3>5. اختبار الفرضية</h3>
+        <p>يتم عبر:</p>
+        <ul>
+          <li>جمع البيانات</li>
+          <li>التحليل الإحصائي (اختبارات)</li>
+          <li>مقارنة النتائج بالفرضية</li>
+          <li>قبول أو رفض</li>
+        </ul>
+        <p>«قبول» الفرضية في العلوم الاجتماعية يعني «عدم رفضها»، وليس إثباتاً مطلقاً.</p>
+      </div>
+
+      <div class="warn-box">
+        <div class="warn-label">⚠️ أخطاء شائعة</div>
+        <p>صياغة فرضية غير قابلة للاختبار (مثل «الديمقراطية أفضل من الديكتاتورية» — حكم قيمي)، أو سؤال مركب يحمل إجابته.</p>
+      </div>
+
+      <div class="summary-box">
+        <h3 style="margin-bottom:10px;color:var(--royal)">📌 خلاصة</h3>
+        <p>السؤال البحثي يوجه البحث، والفرضية تفسير مؤقت. جودة البحث تعتمد على دقة السؤال وسلامة الفرضية وقابلية اختبارها.</p>
+      </div>
+
+      <div class="content-block">
+        <h3>❓ أسئلة للمراجعة</h3>
+        <ol>
+          <li>ما خصائص السؤال البحثي الجيد؟</li>
+          <li>ما الفرق بين الفرضية الصفرية والبديلة؟</li>
+          <li>ضعي فرضية بحثية حول «علاقة التعليم بالمشاركة السياسية».</li>
+        </ol>
+      </div>
+    `,
+
+    'm9': `
+      <span class="lv-badge">🔬 منهجية العلوم السياسية — محور 9</span>
+      <h1 class="lv-title">طرح الأسئلة البحثية — ورشة تطبيقية</h1>
+      <div class="lv-meta"><span>⏱️ 20 دقيقة</span><span>📖 درس شامل</span></div>
+
+      <div class="content-block">
+        <h3>1. اختيار الموضوع</h3>
+        <p>معايير اختيار الموضوع:</p>
+        <ul>
+          <li>الاهتمام الشخصي</li>
+          <li>الأهمية العلمية</li>
+          <li>وفرة المصادر</li>
+          <li>قابلية الإنجاز في الوقت المتاح</li>
+          <li>الإضافة العلمية</li>
+        </ul>
+      </div>
+
+      <div class="content-block">
+        <h3>2. من الموضوع إلى الإشكالية</h3>
+        <p>الموضوع عام: «الفقر». الإشكالية أدق: «كيف تؤثر السياسات الضريبية على تفاقم الفقر في الجزائر بعد 2010؟».</p>
+        <p>الإشكالية هي سؤال مركزي يوضح الغموض أو التناقض الذي يحتاج تفسيراً.</p>
+      </div>
+
+      <div class="content-block">
+        <h3>3. الفرق بين السؤال العام والدقيق</h3>
+        <table class="compare-table">
+          <tr><th>السؤال العام</th><th>السؤال الدقيق</th></tr>
+          <tr><td>ما هي الديمقراطية؟</td><td>كيف أثرت الثورات العربية على ممارسة الديمقراطية في تونس بين 2011-2021؟</td></tr>
+          <tr><td>ما هو الاقتصاد؟</td><td>ما أثر انخفاض النفط على عجز الميزانية الجزائرية بعد 2014؟</td></tr>
+        </table>
+      </div>
+
+      <div class="content-block">
+        <h3>4. شروط السؤال القابل للبحث</h3>
+        <ul>
+          <li>يمكن جمع بيانات له</li>
+          <li>يندرج في تخصص الباحث</li>
+          <li>غير إجابته جاهزة مسبقاً</li>
+          <li>واضح المفاهيم</li>
+        </ul>
+      </div>
+
+      <div class="content-block">
+        <h3>5. تجنب الأسئلة الغامضة والمركبة</h3>
+        <p><strong>غامض:</strong> «كيف يؤثر الاقتصاد على السياسة؟» — واسع جداً.</p>
+        <p><strong>مركّب:</strong> «ما أثر الضرائب والإنفاق العام وسعر الفائدة على النمو والتضخم والبطالة؟» — عدة أسئلة في سؤال.</p>
+      </div>
+
+      <div class="content-block">
+        <h3>6. ورشة تطبيقية</h3>
+        <p>حوّلي الموضوعات التالية إلى أسئلة بحثية دقيقة:</p>
+        <div class="example-box">
+          <div class="ex-label">🎯 تمرين 1</div>
+          <p><strong>الموضوع:</strong> الديمقراطية في العالم العربي</p>
+          <p><strong>سؤال دقيق:</strong> ما العوامل التي أعاقت التحول الديمقراطي في مصر بعد 2011؟</p>
+        </div>
+        <div class="example-box">
+          <div class="ex-label">🎯 تمرين 2</div>
+          <p><strong>الموضوع:</strong> الفساد</p>
+          <p><strong>سؤال دقيق:</strong> كيف تؤثر آليات الرقابة المؤسسية على مستويات الفساد الإداري في الجزائر (2015-2023)؟</p>
+        </div>
+      </div>
+
+      <div class="summary-box">
+        <h3 style="margin-bottom:10px;color:var(--royal)">📌 خلاصة</h3>
+        <p>الموضوع الجيد يمر بمراحل: اختيار، تضييق، صياغة إشكالية، سؤال رئيسي وأسئلة فرعية. الدقة والتحديد شرطا كل مرحلة.</p>
+      </div>
+
+      <div class="content-block">
+        <h3>❓ أسئلة للمراجعة</h3>
+        <ol>
+          <li>ما الفرق بين الموضوع والإشكالية؟</li>
+          <li>ما خصائص السؤال القابل للبحث؟</li>
+          <li>لماذا يجب تجنب الأسئلة المركبة؟</li>
+        </ol>
+      </div>
+    `,
+
+    'm10': `
+      <span class="lv-badge">🔬 منهجية العلوم السياسية — محور 10</span>
+      <h1 class="lv-title">المتغيرات والعلاقات</h1>
+      <div class="lv-meta"><span>⏱️ 22 دقيقة</span><span>📖 درس شامل</span></div>
+
+      <div class="content-block">
+        <h3>1. مفهوم المتغير</h3>
+        <div class="def-box">
+          <div class="def-label">تعريف</div>
+          <p>المتغير: خاصية قابلة للقياس والتباين من حالة لأخرى. مثل: الدخل، التعليم، المشاركة الانتخابية.</p>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h3>2. أنواع المتغيرات</h3>
+        <ul>
+          <li><strong>المتغير المستقل (X):</strong> المتغير المُفسِّر — يؤثر</li>
+          <li><strong>المتغير التابع (Y):</strong> المتغير المُفسَّر — يتأثر</li>
+          <li><strong>المتغير الوسيط:</strong> وسيط بين X وY (X ← وسيط ← Y)</li>
+          <li><strong>المتغير المعدِّل:</strong> يُغيّر قوة أو اتجاه العلاقة</li>
+          <li><strong>المتغير الضابط:</strong> يُثبَّت لإزالة أثره</li>
+        </ul>
+      </div>
+
+      <div class="content-block">
+        <h3>3. المتغيرات الكمية والنوعية</h3>
+        <ul>
+          <li><strong>كمية:</strong> قابلة للقياس العددي (العمر، الدخل)</li>
+          <li><strong>نوعية:</strong> غير عددية (الجنس، الانتماء الحزبي)</li>
+        </ul>
+      </div>
+
+      <div class="content-block">
+        <h3>4. العلاقة الارتباطية والسببية</h3>
+        <p><strong>الارتباط:</strong> علاقة إحصائية بين متغيرين دون افتراض السببية.</p>
+        <p><strong>السببية:</strong> علاقة يسبب فيها X تغير Y، وتتطلب ثلاثة شروط:</p>
+        <ol>
+          <li>الاقتران (X وY يتغيران معاً)</li>
+          <li>الترتيب الزمني (X قبل Y)</li>
+          <li>عدم وجود متغير ثالث مفسر</li>
+        </ol>
+        <div class="example-box">
+          <div class="ex-label">🌟 مثال</div>
+          <p>الارتباط بين بيع المثلجات والغرق في المسابح صحيح لكنه ليس سببياً، فالحرارة تفسران معاً.</p>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h3>5. المؤشرات</h3>
+        <p>المؤشر: أداة قياس للمفهوم المجرد. مثل: «الديمقراطية» مؤشراتها: وجود انتخابات حرة، حريات إعلامية، سيادة القانون.</p>
+      </div>
+
+      <div class="content-block">
+        <h3>6. التعريف الإجرائي للمتغيرات</h3>
+        <p>يُحدد كيف سيُقاس المتغير في هذا البحث. مثال: «المشاركة السياسية» تُقاس بـ: نسبة التصويت + الانتماء الحزبي + حضور تجمعات.</p>
+      </div>
+
+      <div class="content-block">
+        <h3>7. جدول علاقة المتغيرات (مثال)</h3>
+        <table class="compare-table">
+          <tr><th>المتغير</th><th>النوع</th><th>المؤشرات</th></tr>
+          <tr><td>المستوى التعليمي</td><td>مستقل</td><td>سنوات الدراسة، الشهادة</td></tr>
+          <tr><td>المشاركة السياسية</td><td>تابع</td><td>التصويت، العضوية، الاحتجاج</td></tr>
+          <tr><td>الوعي السياسي</td><td>وسيط</td><td>مستوى المعلومات السياسية</td></tr>
+          <tr><td>البيئة الحضرية/الريفية</td><td>معدِّل</td><td>مكان الإقامة</td></tr>
+        </table>
+      </div>
+
+      <div class="summary-box">
+        <h3 style="margin-bottom:10px;color:var(--royal)">📌 خلاصة</h3>
+        <p>المتغيرات أساس أي بحث تجريبي. التمييز بين أنواعها وتحديد المؤشرات والتعريف الإجرائي شرط لقياس دقيق وسليم.</p>
+      </div>
+
+      <div class="content-block">
+        <h3>❓ أسئلة للمراجعة</h3>
+        <ol>
+          <li>ما الفرق بين المتغير المستقل والتابع؟</li>
+          <li>اذكري شروط العلاقة السببية.</li>
+          <li>ما هو التعريف الإجرائي للمتغير؟</li>
+        </ol>
+      </div>
+    `,
+
+    'm11': `
+      <span class="lv-badge">🔬 منهجية العلوم السياسية — محور 11</span>
+      <h1 class="lv-title">الفروض العلمية — درس متعمق</h1>
+      <div class="lv-meta"><span>⏱️ 24 دقيقة</span><span>📖 درس شامل</span></div>
+
+      <div class="content-block">
+        <h3>1. تعريف الفرض</h3>
+        <div class="def-box">
+          <div class="def-label">تعريف</div>
+          <p>الفرض العلمي: تفسير مؤقت لظاهرة، أو تنبؤ بعلاقة بين متغيرين، يُصاغ بشكل قابل للاختبار.</p>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h3>2. مصادر بناء الفرضيات</h3>
+        <ul>
+          <li>الملاحظة</li>
+          <li>الأدبيات السابقة</li>
+          <li>النظرية</li>
+          <li>الحدس العلمي</li>
+        </ul>
+      </div>
+
+      <div class="content-block">
+        <h3>3. شروط الفرضية</h3>
+        <ul>
+          <li>محددة</li>
+          <li>قابلة للاختبار</li>
+          <li>مرتبطة بنظرية</li>
+          <li>موجزة</li>
+          <li>تعبر عن علاقة بين متغيرين على الأقل</li>
+        </ul>
+      </div>
+
+      <div class="content-block">
+        <h3>4. أنواع الفروض</h3>
+        <ul>
+          <li><strong>بسيطة:</strong> علاقة بين متغيرين</li>
+          <li><strong>مركبة:</strong> علاقة معقدة</li>
+          <li><strong>صفرية:</strong> لا علاقة</li>
+          <li><strong>بديلة:</strong> توجد علاقة</li>
+          <li><strong>اتجاهية:</strong> تحدد اتجاه العلاقة</li>
+          <li><strong>غير اتجاهية:</strong> تذكر وجود علاقة دون تحديد اتجاه</li>
+        </ul>
+      </div>
+
+      <div class="content-block">
+        <h3>5. صياغة الفرضية</h3>
+        <div class="example-box">
+          <div class="ex-label">🌟 أمثلة عملية</div>
+          <p><strong>1.</strong> «كلما ارتفع مستوى التعليم، ارتفعت نسبة المشاركة السياسية» — اتجاهية إيجابية.</p>
+          <p><strong>2.</strong> «توجد علاقة بين معدل البطالة ومستوى الاستقرار السياسي» — غير اتجاهية.</p>
+          <p><strong>3.</strong> H0: «لا توجد علاقة ذات دلالة إحصائية بين مستوى التعليم والمشاركة السياسية»</p>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h3>6. العلاقة بين الفرضية والنظرية</h3>
+        <p>النظرية تُنتج فرضيات. الفرضية جزء قابل للاختبار من نظرية أوسع. مثال: نظرية التحديث (ليبست) تُنتج فرضية: «التنمية الاقتصادية تؤدي إلى الديمقراطية».</p>
+      </div>
+
+      <div class="content-block">
+        <h3>7. اختبار الفرضية</h3>
+        <p>الخطوات:</p>
+        <ol>
+          <li>صياغة H0 وH1</li>
+          <li>تحديد مستوى الدلالة (0.05 عادة)</li>
+          <li>جمع البيانات</li>
+          <li>اختبار إحصائي</li>
+          <li>قرار: رفض H0 أو عدم رفضها</li>
+        </ol>
+      </div>
+
+      <div class="content-block">
+        <h3>8. الأخطاء الشائعة</h3>
+        <ul>
+          <li>صياغة فرضية غير قابلة للاختبار</li>
+          <li>خلط الفرض بالقيمة الأخلاقية</li>
+          <li>الفرضية المركبة جداً</li>
+          <li>إهمال الفرض الصفري</li>
+          <li>اعتبار «قبول الفرضية» إثباتاً نهائياً</li>
+        </ul>
+      </div>
+
+      <div class="content-block">
+        <h3>9. تمارين تطبيقية</h3>
+        <div class="example-box">
+          <div class="ex-label">✏️ تمرين 1 — اكتبي فرضية للعلاقة بين:</div>
+          <p>مستوى الفساد والاستثمار الأجنبي المباشر</p>
+          <p><strong>الحل النموذجي:</strong> «توجد علاقة عكسية ذات دلالة إحصائية بين مستوى الفساد وتدفق الاستثمار الأجنبي المباشر: كلما ارتفع الفساد، انخفض الاستثمار الأجنبي».</p>
+        </div>
+        <div class="example-box">
+          <div class="ex-label">✏️ تمرين 2 — صياغة الفرض الصفري:</div>
+          <p>H0: «لا توجد علاقة عكسية ذات دلالة إحصائية بين مستوى الفساد والاستثمار الأجنبي المباشر».</p>
+        </div>
+      </div>
+
+      <div class="summary-box">
+        <h3 style="margin-bottom:10px;color:var(--royal)">📌 خلاصة</h3>
+        <p>الفرضية جسر بين النظرية والواقع. شروطها الدقة وقابلية الاختبار والارتباط بالنظرية. اختبارها يقرر قبولها أو رفضها، لكن لا يثبتها نهائياً.</p>
+      </div>
+
+      <div class="content-block">
+        <h3>❓ أسئلة للمراجعة</h3>
+        <ol>
+          <li>اذكري ثلاث خصائص للفرضية الجيدة.</li>
+          <li>ما الفرق بين الفرض الصفري والبديل؟</li>
+          <li>لماذا لا يمكن «إثبات» فرضية إثباتاً نهائياً؟</li>
+        </ol>
+      </div>
+    `
+  };
+  return C[id] || `
+    <div class="empty-state">
+      <div class="es-ico">📭</div>
+      <p>هذا الدرس سيُضاف قريباً</p>
+    </div>
+  `;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   الجزء الثالث: بنك الأسئلة
+   ═══════════════════════════════════════════════════════════ */
+const quizBank = {
+  'econ': {
+    title: 'اختبار شامل — الاقتصاد السياسي',
+    desc: '10 أسئلة تغطي المحاور السبعة',
+    questions: [
+      { q: 'ما هو موضوع الاقتصاد السياسي؟', opts: [
+        'الظواهر الطبيعية فقط',
+        'العلاقة بين الاقتصاد والسياسة والمجتمع',
+        'الرياضيات المالية',
+        'التاريخ القديم'
+      ], correct: 1, explain: 'الاقتصاد السياسي يدرس التفاعل بين الاقتصاد والسياسة والمجتمع.' },
+      { q: 'من هو صاحب كتاب "ثروة الأمم"؟', opts: [
+        'كارل ماركس', 'جون كينز', 'آدم سميث', 'ديفيد ريكاردو'
+      ], correct: 2, explain: 'آدم سميث نشر "ثروة الأمم" عام 1776، وهو مؤسس المدرسة الكلاسيكية.' },
+      { q: 'المدرسة التي ترى أن الذهب والفضة هما الثروة الحقيقية هي:', opts: [
+        'المدرسة الطبيعية', 'المدرسة التجارية', 'الماركسية', 'الكينزية'
+      ], correct: 1, explain: 'المدرسة التجارية (Mercantilism) ركّزت على المعادن النفيسة كمعيار للثروة.' },
+      { q: 'السياسة المالية تُدار من قِبل:', opts: [
+        'البنك المركزي', 'الحكومة/البرلمان', 'الشركات الخاصة', 'المنظمات الدولية'
+      ], correct: 1, explain: 'السياسة المالية أداة الحكومة عبر الضرائب والإنفاق.' },
+      { q: 'رفع سعر الفائدة عادة يؤدي إلى:', opts: [
+        'زيادة التضخم', 'خفض التضخم', 'زيادة الاستثمار', 'زيادة الاستهلاك'
+      ], correct: 1, explain: 'رفع الفائدة يجعل الاقتراض أغلى فيقل الطلب وينخفض التضخم.' },
+      { q: 'الخصخصة تعني:', opts: [
+        'بيع المؤسسات العمومية للقطاع الخاص',
+        'تأميم الشركات الخاصة',
+        'زيادة الضرائب',
+        'رفع الدعم'
+      ], correct: 0, explain: 'الخصخصة نقل ملكية القطاع العام إلى الخاص.' },
+      { q: 'إعادة توزيع الثروة تهدف إلى:', opts: [
+        'زيادة الفوارق', 'تقليص الفوارق الاجتماعية', 'إلغاء السوق', 'منع الاستثمار'
+      ], correct: 1, explain: 'الهدف الرئيسي هو تحقيق عدالة اجتماعية عبر تقليص الفوارق.' },
+      { q: 'الحالة التي يفشل فيها السوق في تحقيق الكفاءة تُسمى:', opts: [
+        'توازن السوق', 'إخفاق السوق', 'فائض السوق', 'كساد'
+      ], correct: 1, explain: 'إخفاق السوق يشمل الاحتكار والخارجيات والسلع العامة.' },
+      { q: 'الضرائب التي تُفرض على الاستهلاك (مثل TVA) تُسمى:', opts: [
+        'مباشرة', 'غير مباشرة', 'تصاعدية', 'عقارية'
+      ], correct: 1, explain: 'الضرائب غير المباشرة تُفرض على السلع والخدمات لا على الدخل.' },
+      { q: 'الدين العام يمثل:', opts: [
+        'ثروة الدولة', 'تراكم اقتراض الدولة', 'إيرادات الضرائب', 'الدعم الاجتماعي'
+      ], correct: 1, explain: 'الدين العام هو تراكم الاقتراض الحكومي لتغطية العجز.' }
+    ]
+  },
+  'meth': {
+    title: 'اختبار شامل — منهجية العلوم السياسية',
+    desc: '10 أسئلة تغطي المحاور الإحدى عشر',
+    questions: [
+      { q: 'من صاحب نظرية "الثورات العلمية"؟', opts: [
+        'كارل بوبر', 'توماس كون', 'ماكس فيبر', 'أوغست كونت'
+      ], correct: 1, explain: 'توماس كون في كتابه "بنية الثورات العلمية" 1962.' },
+      { q: 'المعرفة التي تُبنى على الاختبار والملاحظة هي:', opts: [
+        'المعرفة العامية', 'المعرفة الفلسفية', 'المعرفة العلمية', 'المعرفة الدينية'
+      ], correct: 2, explain: 'المعرفة العلمية تعتمد على المنهج والاختبار.' },
+      { q: 'المنهج الذي يقارن بين حالتين أو أكثر هو:', opts: [
+        'الوصفي', 'التاريخي', 'المقارن', 'التحليلي'
+      ], correct: 2, explain: 'المنهج المقارن يدرس أوجه الشبه والاختلاف.' },
+      { q: 'الفرضية التي تنص على عدم وجود علاقة تُسمى:', opts: [
+        'البديلة', 'الصفرية', 'الاتجاهية', 'المركبة'
+      ], correct: 1, explain: 'الفرضية الصفرية H0 تنص على عدم وجود علاقة.' },
+      { q: 'نظام APA يُستخدم بشكل شائع في:', opts: [
+        'الآداب', 'العلوم الاجتماعية', 'التاريخ', 'الطب فقط'
+      ], correct: 1, explain: 'APA هو نظام العلوم الاجتماعية.' },
+      { q: 'برنامج إدارة المراجع مفتوح المصدر هو:', opts: [
+        'EndNote', 'Mendeley', 'Zotero', 'RefWorks'
+      ], correct: 2, explain: 'Zotero مجاني ومفتوح المصدر بالكامل.' },
+      { q: 'المتغير الذي يؤثر في متغير آخر يُسمى:', opts: [
+        'التابع', 'المستقل', 'الوسيط', 'المعدِّل'
+      ], correct: 1, explain: 'المتغير المستقل هو المفسِّر/المؤثر.' },
+      { q: 'التعريف الذي يحدد كيفية قياس المفهوم يُسمى:', opts: [
+        'الاصطلاحي', 'الإجرائي', 'اللغوي', 'التاريخي'
+      ], correct: 1, explain: 'التعريف الإجرائي يحدد إجراءات القياس.' },
+      { q: 'أخذ عمل شخص آخر دون ذكر المصدر يُسمى:', opts: [
+        'اقتباساً مباشراً', 'اقتباساً غير مباشر', 'انتحالاً علمياً', 'مراجعة أدبيات'
+      ], correct: 2, explain: 'الانتحال العلمي جريمة أكاديمية.' },
+      { q: 'العلاقة السببية تتطلب:', opts: [
+        'الاقتران فقط', 'الاقتران + الترتيب الزمني + عدم وجود متغير ثالث',
+        'وجود ارتباط فقط', 'كثرة العينات'
+      ], correct: 1, explain: 'السببية تحتاج الشروط الثلاثة مجتمعة.' }
+    ]
+  }
+};
+
+/* ═══════════════════════════════════════════════════════════
+   الجزء الرابع: التنقل والعرض
+   ═══════════════════════════════════════════════════════════ */
+const VIEWS = ['home','economics','methodology','lesson','quizzes','quiz-taking','flashcards','glossary','pomodoro','notes','tasks','search','settings'];
+let currentView = 'home';
+let previousView = 'home';
+
+function nav(view) {
+  if (!VIEWS.includes(view)) return;
+  if (view !== 'lesson') previousView = currentView;
+  currentView = view;
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  const target = document.getElementById('view-' + view);
+  if (target) target.classList.add('active');
+  window.scrollTo({top: 0, behavior: 'instant'});
+  updateBottomNav();
+  updateDrawerNav();
+  // rerender dynamic views
+  if (view === 'home') renderHome();
+  if (view === 'economics') renderEconUnits();
+  if (view === 'methodology') renderMethUnits();
+  if (view === 'quizzes') renderQuizList();
+  if (view === 'glossary') renderGlossary();
+  if (view === 'notes') renderNotes();
+  if (view === 'tasks') renderTasks();
+  if (view === 'flashcards') renderFlashcard();
+  if (view === 'settings') applyTheme();
+}
+
+function goBack() {
+  nav(previousView);
+}
+
+function updateBottomNav() {
+  const items = [
+    { view: 'home', icon: '🏠', label: 'الرئيسية' },
+    { view: 'economics', icon: '💰', label: 'اقتصاد' },
+    { view: 'methodology', icon: '🔬', label: 'منهجية' },
+    { view: 'quizzes', icon: '📝', label: 'اختبارات' },
+    { view: 'settings', icon: '⚙️', label: 'إعدادات' }
+  ];
+  const nav = document.getElementById('bottomNav');
+  nav.innerHTML = items.map(it => `
+    <button class="bnav-item ${currentView === it.view ? 'active' : ''}" onclick="nav('${it.view}')">
+      <span class="bnav-ico">${it.icon}</span>
+      <span>${it.label}</span>
+    </button>
+  `).join('');
+}
+
+function toggleDrawer() {
+  document.getElementById('drawer').classList.toggle('open');
+  document.getElementById('drawerOverlay').classList.toggle('open');
+}
+
+function updateDrawerNav() {
+  const links = [
+    { view: 'home', icon: '🏠', label: 'الرئيسية' },
+    { view: 'economics', icon: '💰', label: 'الاقتصاد السياسي' },
+    { view: 'methodology', icon: '🔬', label: 'منهجية العلوم السياسية' },
+    { view: 'quizzes', icon: '📝', label: 'الاختبارات' },
+    { view: 'flashcards', icon: '🎴', label: 'بطاقات المراجعة' },
+    { view: 'glossary', icon: '📚', label: 'قاموس المصطلحات' },
+    { view: 'notes', icon: '📝', label: 'ملاحظاتي' },
+    { view: 'tasks', icon: '✅', label: 'قائمة المهام' },
+    { view: 'pomodoro', icon: '🍅', label: 'بومودورو' },
+    { view: 'search', icon: '🔍', label: 'البحث الشامل' },
+    { view: 'settings', icon: '⚙️', label: 'الإعدادات' }
+  ];
+  document.getElementById('drawerNav').innerHTML = links.map(l => `
+    <button class="drawer-link ${currentView === l.view ? 'active' : ''}" onclick="nav('${l.view}');toggleDrawer()">
+      <span class="di">${l.icon}</span>
+      <span>${l.label}</span>
+    </button>
+  `).join('');
+}
+
+/* ═══════════════════════════════════════════════════════════
+   الجزء الخامس: عرض المحتوى
+   ═══════════════════════════════════════════════════════════ */
+function renderHome() {
+  // motivational quote
+  const quotes = [
+    'المعرفة قوة، والاقتصاد السياسي مفتاح فهم العالم.',
+    'التعلم استثمار لا ينضب، وكل درس يقرّبك من التميز.',
+    'الفهم العميق أفضل من الحفظ السطحي، والسؤال الجيد نصف الإجابة.',
+    'النجاح الأكاديمي رحلة يومية، خطوة بخطوة.',
+    'العقل المنظم يبني المعرفة، والعقل الناقد يحسنها.'
+  ];
+  document.getElementById('heroQuote').innerHTML =
+    `<span class="hero-quote-ico">❝</span> ${quotes[Math.floor(Math.random() * quotes.length)]}`;
+
+  // stats
+  const totalLessons = econUnits.length + methUnits.length;
+  const completed = Object.keys(state.progress).filter(k => state.progress[k]).length;
+  const quizzesPassed = Object.values(state.quizResults).filter(r => r.score >= r.total * 0.6).length;
+  const pct = totalLessons ? Math.round(completed / totalLessons * 100) : 0;
+
+  document.getElementById('statLessons').textContent = completed;
+  document.getElementById('statQuizzes').textContent = quizzesPassed;
+  document.getElementById('statProgress').textContent = pct + '%';
+
+  document.getElementById('ringText').textContent = pct + '%';
+  const ring = document.getElementById('ringFg');
+  const circumference = 2 * Math.PI * 38;
+  ring.style.strokeDashoffset = circumference - (pct / 100) * circumference;
+  document.getElementById('piBar').style.width = pct + '%';
+
+  let msg = 'ابدئي رحلتك التعليمية اليوم';
+  if (pct > 0 && pct < 30) msg = 'بداية جيدة! واصلي';
+  else if (pct >= 30 && pct < 70) msg = 'أنتِ في منتصف الطريق، تقدم رائع!';
+  else if (pct >= 70 && pct < 100) msg = 'قريب جداً من الإنجاز الكامل!';
+  else if (pct >= 100) msg = '🎉 أكملتِ كل الدروس!';
+  document.getElementById('progressMsg').textContent = msg;
+
+  // econ/meth progress bars
+  const econDone = econUnits.filter(u => state.progress[u.id]).length;
+  const methDone = methUnits.filter(u => state.progress[u.id]).length;
+  document.getElementById('econProgress').style.width = (econDone / econUnits.length * 100) + '%';
+  document.getElementById('methProgress').style.width = (methDone / methUnits.length * 100) + '%';
+
+  // recent lessons
+  const allLessons = [...econUnits, ...methUnits];
+  const recent = allLessons.slice(-3).reverse();
+  document.getElementById('recentLessons').innerHTML = recent.map(l => `
+    <div class="lesson-item ${state.progress[l.id] ? 'done' : ''}" onclick="openLesson('${l.id}')">
+      <div class="li-num">${state.progress[l.id] ? '✓' : l.icon}</div>
+      <div class="li-body">
+        <div class="li-title">${l.title}</div>
+        <div class="li-sub">${l.desc}</div>
+      </div>
+      <div style="color:var(--muted);font-size:18px">›</div>
+    </div>
+  `).join('');
+
+  // weekly schedule
+  const days = ['السبت','الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة'];
+  const scheduleItems = [
+    { day: 'السبت', title: 'اقتصاد سياسي — محور 1', time: '10:00 - 11:30' },
+    { day: 'الأحد', title: 'منهجية — محور 1', time: '10:00 - 11:30' },
+    { day: 'الاثنين', title: 'اقتصاد سياسي — محور 2', time: '14:00 - 15:30' },
+    { day: 'الثلاثاء', title: 'منهجية — محور 3', time: '10:00 - 11:30' },
+    { day: 'الأربعاء', title: 'مراجعة + اختبار', time: '16:00 - 17:00' },
+    { day: 'الخميس', title: 'بطاقات مراجعة', time: '15:00 - 16:00' },
+    { day: 'الجمعة', title: 'راحة', time: '—' }
+  ];
+  document.getElementById('weeklySchedule').innerHTML = scheduleItems.map(s => `
+    <div class="schedule-item">
+      <div class="sch-day"><span class="sd-num">${s.day === 'الجمعة' ? '🌟' : '📖'}</span></div>
+      <div class="sch-info">
+        <h4>${s.day} — ${s.title}</h4>
+        <p>${s.time}</p>
+      </div>
+    </div>
+  `).join('');
+
+  // achievements
+  const achList = [
+    { icon: '🌱', title: 'البداية', unlocked: completed >= 1 },
+    { icon: '📚', title: '5 دروس', unlocked: completed >= 5 },
+    { icon: '🎯', title: '10 دروس', unlocked: completed >= 10 },
+    { icon: '🏆', title: 'خبيرة', unlocked: completed >= 15 },
+    { icon: '⭐', title: 'أول اختبار', unlocked: Object.keys(state.quizResults).length >= 1 },
+    { icon: '🎓', title: '3 اختبارات', unlocked: Object.keys(state.quizResults).length >= 3 },
+    { icon: '💎', title: '50% إنجاز', unlocked: pct >= 50 },
+    { icon: '👑', title: '100% إنجاز', unlocked: pct >= 100 }
+  ];
+  document.getElementById('achievementsGrid').innerHTML = achList.map(a => `
+    <div class="achievement ${a.unlocked ? 'unlocked' : 'locked'}">
+      <div class="ach-ico">${a.icon}</div>
+      <div class="ach-title">${a.title}</div>
+    </div>
+  `).join('');
+}
+
+function renderEconUnits() {
+  document.getElementById('econUnits').innerHTML = econUnits.map(u => `
+    <div class="lesson-item ${state.progress[u.id] ? 'done' : ''}" onclick="openLesson('${u.id}')">
+      <div class="li-num" style="background:${state.progress[u.id] ? 'var(--success)' : 'var(--ivory-2)'};color:${state.progress[u.id] ? '#fff' : 'var(--royal-2)'}">
+        ${state.progress[u.id] ? '✓' : u.icon}
+      </div>
+      <div class="li-body">
+        <div class="li-title">${u.title}</div>
+        <div class="li-sub">${u.desc}</div>
+      </div>
+      <div style="color:var(--muted);font-size:18px">›</div>
+    </div>
+  `).join('');
+}
+
+function renderMethUnits() {
+  document.getElementById('methUnits').innerHTML = methUnits.map(u => `
+    <div class="lesson-item ${state.progress[u.id] ? 'done' : ''}" onclick="openLesson('${u.id}')">
+      <div class="li-num" style="background:${state.progress[u.id] ? 'var(--success)' : 'var(--ivory-2)'};color:${state.progress[u.id] ? '#fff' : 'var(--royal-2)'}">
+        ${state.progress[u.id] ? '✓' : u.icon}
+      </div>
+      <div class="li-body">
+        <div class="li-title">${u.title}</div>
+        <div class="li-sub">${u.desc}</div>
+      </div>
+      <div style="color:var(--muted);font-size:18px">›</div>
+    </div>
+  `).join('');
+}
+
+let currentLessonId = null;
+
+function openLesson(id) {
+  currentLessonId = id;
+  const content = getLessonContent(id);
+  const lessonItem = [...econUnits, ...methUnits].find(u => u.id === id);
+  const isDone = state.progress[id];
+  const container = document.getElementById('lessonContent');
+  container.innerHTML = `
+    <div class="lesson-view">
+      ${content}
+      <div style="display:flex;gap:10px;margin-top:24px">
+        <button class="btn ${isDone ? 'btn-success' : 'btn-primary'}" onclick="markLessonDone('${id}')" style="flex:1">
+          ${isDone ? '✓ مكتمل' : '✓ تحديد كمكتمل'}
+        </button>
+        <button class="btn btn-ghost" onclick="nav('quizzes')">📝 اختبر نفسك</button>
+      </div>
+    </div>
+  `;
+  nav('lesson');
+}
+
+function markLessonDone(id) {
+  state.progress[id] = !state.progress[id];
+  saveState();
+  showToast(state.progress[id] ? '✓ تم تحديد الدرس كمكتمل' : 'تم إلغاء الإكمال');
+  openLesson(id);
+}
+
+function renderQuizList() {
+  const quizzes = [
+    { id: 'econ', title: quizBank.econ.title, desc: quizBank.econ.desc, qs: quizBank.econ.questions.length },
+    { id: 'meth', title: quizBank.meth.title, desc: quizBank.meth.desc, qs: quizBank.meth.questions.length }
+  ];
+  document.getElementById('quizList').innerHTML = quizzes.map(q => {
+    const result = state.quizResults[q.id];
+    const resultBadge = result ? `<span style="color:var(--success);font-weight:700;font-size:12px">✓ ${result.score}/${result.total}</span>` : '';
+    return `
+      <div class="exam-card">
+        <h3>${q.title}</h3>
+        <p>${q.desc}</p>
+        <div class="exam-meta">
+          <span>📝 ${q.qs} أسئلة</span>
+          <span>⏱️ ~${q.qs} دقيقة</span>
+          ${resultBadge}
+        </div>
+        <button class="btn btn-primary btn-full" onclick="startQuiz('${q.id}')">
+          ${result ? '↺ إعادة الاختبار' : '▶ ابدأ الاختبار'}
+        </button>
+      </div>
+    `;
+  }).join('');
+}
+
+let currentQuiz = null;
+let quizAnswers = [];
+
+function startQuiz(id) {
+  currentQuiz = quizBank[id];
+  quizAnswers = new Array(currentQuiz.questions.length).fill(-1);
+  renderQuiz();
+  nav('quiz-taking');
+}
+
+function renderQuiz() {
+  const container = document.getElementById('quizTaking');
+  container.innerHTML = `
+    <div class="quiz-wrap">
+      <div style="margin-bottom:20px">
+        <h2 style="font-size:20px;margin-bottom:4px">${currentQuiz.title}</h2>
+        <p style="font-size:13px;color:var(--muted)">${currentQuiz.questions.length} أسئلة</p>
+      </div>
+      ${currentQuiz.questions.map((q, qi) => `
+        <div class="quiz-q" id="q-${qi}">
+          <div class="q-num">السؤال ${qi + 1} من ${currentQuiz.questions.length}</div>
+          <div class="q-text">${q.q}</div>
+          ${q.opts.map((o, oi) => `
+            <div class="opt" id="opt-${qi}-${oi}" onclick="selectAnswer(${qi}, ${oi})">
+              <div class="opt-marker">${String.fromCharCode(65 + oi)}</div>
+              <div class="opt-body">${o}</div>
+            </div>
+          `).join('')}
+          <div class="q-feedback" id="fb-${qi}" style="display:none"></div>
+        </div>
+      `).join('')}
+      <div id="quizResultBox"></div>
+      <button class="btn btn-primary btn-full" id="submitQuizBtn" onclick="submitQuiz()" style="margin-top:12px">
+        ✓ تسليم الاختبار
+      </button>
+    </div>
+  `;
+}
+
+function selectAnswer(qi, oi) {
+  if (document.getElementById('opt-' + qi + '-' + oi).classList.contains('correct') ||
+      document.getElementById('opt-' + qi + '-' + oi).classList.contains('wrong')) {
+    return; // already submitted
+  }
+  // clear other selections in this question
+  currentQuiz.questions[qi].opts.forEach((_, i) => {
+    const el = document.getElementById('opt-' + qi + '-' + i);
+    if (el) el.classList.remove('selected');
+  });
+  document.getElementById('opt-' + qi + '-' + oi).classList.add('selected');
+  quizAnswers[qi] = oi;
+}
+
+function submitQuiz() {
+  let score = 0;
+  currentQuiz.questions.forEach((q, qi) => {
+    const correct = q.correct;
+    const selected = quizAnswers[qi];
+    if (selected === correct) score++;
+    q.opts.forEach((_, oi) => {
+      const el = document.getElementById('opt-' + qi + '-' + oi);
+      if (!el) return;
+      el.classList.remove('selected');
+      if (oi === correct) el.classList.add('correct');
+      else if (oi === selected) el.classList.add('wrong');
+      // disable clicks
+      el.onclick = null;
+    });
+    const fb = document.getElementById('fb-' + qi);
+    fb.style.display = 'block';
+    if (selected === correct) {
+      fb.className = 'q-feedback ok';
+      fb.innerHTML = `✓ إجابة صحيحة! ${q.explain}`;
+    } else if (selected === -1) {
+      fb.className = 'q-feedback bad';
+      fb.innerHTML = `⚠️ لم تُجب. الإجابة الصحيحة: <strong>${q.opts[correct]}</strong><br>${q.explain}`;
+    } else {
+      fb.className = 'q-feedback bad';
+      fb.innerHTML = `✗ إجابة خاطئة. الصحيحة: <strong>${q.opts[correct]}</strong><br>${q.explain}`;
+    }
+  });
+  const total = currentQuiz.questions.length;
+  const pct = Math.round(score / total * 100);
+  state.quizResults[currentQuiz.title] = { score, total, pct, date: new Date().toISOString() };
+  // key by title for uniqueness in rendering
+  const key = currentQuiz.title.includes('الاقتصاد') ? 'econ' : 'meth';
+  state.quizResults[key] = { score, total, pct, date: new Date().toISOString() };
+  saveState();
+
+  document.getElementById('quizResultBox').innerHTML = `
+    <div class="quiz-result">
+      <div class="qr-lbl">نتيجتك</div>
+      <div class="qr-score">${score} / ${total}</div>
+      <div class="qr-lbl">${pct}% — ${pct >= 60 ? '🎉 ممتاز! اجتزتِ الاختبار' : '📚 يحتاج المزيد من المراجعة'}</div>
+    </div>
+  `;
+  document.getElementById('submitQuizBtn').style.display = 'none';
+  renderHome();
+}
+
+/* ═══════════════════════════════════════════════════════════
+   الجزء السادس: بطاقات المراجعة
+   ═══════════════════════════════════════════════════════════ */
+const flashcards = [
+  { front: 'الاقتصاد السياسي', back: 'العلم الذي يدرس العلاقة بين الاقتصاد والسياسة والمجتمع، وكيف تؤثر القوى الاقتصادية في القرار السياسي والعكس.' },
+  { front: 'اليد الخفية', back: 'مفهوم آدم سميث: المصلحة الفردية في السوق الحر تؤدي تلقائياً إلى المصلحة العامة.' },
+  { front: 'فائض القيمة', back: 'مفهوم ماركسي: الفرق بين قيمة ما ينتجه العامل وأجره، يستولي عليه الرأسمالي.' },
+  { front: 'النموذج المعرفي (Paradigm)', back: 'إطار نظري شامل يحدد الافتراضات والمناهج لمجتمع علمي في فترة ما (توماس كون).' },
+  { front: 'الفرضية الصفرية', back: 'فرضية تنص على عدم وجود علاقة أو فرق دال إحصائياً بين المتغيرات (H0).' },
+  { front: 'إخفاق السوق', back: 'حالة لا يحقق فيها السوق الكفاءة، مثل الاحتكار والخارجيات والسلع العامة.' },
+  { front: 'التعريف الإجرائي', back: 'تحديد كيفية قياس المفهوم في البحث، لا شرح معناه العام فقط.' },
+  { front: 'المنهج المقارن', back: 'منهج يقارن بين حالتين أو أكثر لتحديد أوجه الشبه والاختلاف والأنماط.' },
+  { front: 'الانتحال العلمي', back: 'نسبة عمل الآخرين للنفس دون ذكر المصدر، وهو جريمة أكاديمية.' },
+  { front: 'السياسة النقدية', back: 'إدارة البنك المركزي لعرض النقود وأسعار الفائدة لتحقيق الاستقرار الاقتصادي.' }
+];
+let fcIndex = 0;
+let fcFlipped = false;
+
+function renderFlashcard() {
+  const card = document.getElementById('flashcard');
+  if (!card) return;
+  const c = flashcards[fcIndex];
+  document.getElementById('fcFront').textContent = c.front;
+  document.getElementById('fcBack').textContent = c.back;
+  document.getElementById('fcCounter').textContent = `${fcIndex + 1} / ${flashcards.length}`;
+  card.classList.remove('flipped');
+  fcFlipped = false;
+}
+
+function flipCard() {
+  const card = document.getElementById('flashcard');
+  card.classList.toggle('flipped');
+  fcFlipped = !fcFlipped;
+}
+
+function nextCard() {
+  fcIndex = (fcIndex + 1) % flashcards.length;
+  renderFlashcard();
+}
+
+function prevCard() {
+  fcIndex = (fcIndex - 1 + flashcards.length) % flashcards.length;
+  renderFlashcard();
+}
+
+/* ═══════════════════════════════════════════════════════════
+   الجزء السابع: قاموس المصطلحات
+   ═══════════════════════════════════════════════════════════ */
+const glossaryData = [
+  { term: 'الاقتصاد السياسي', def: 'علم يدرس العلاقة بين الاقتصاد والسياسة والمجتمع.' },
+  { term: 'الليبرالية', def: 'تيار يدعو لحرية السوق والحرية الفردية.' },
+  { term: 'النيوليبرالية', def: 'تيار معاصر يدعو لتقليص دور الدولة والخصخصة.' },
+  { term: 'الكينزية', def: 'نظرية اقتصادية تدعو لتدخل الدولة لتحفيز الطلب الكلي.' },
+  { term: 'الماركسية', def: 'نظرية نقدية للرأسمالية ترى ضرورة الانتقال للاشتراكية.' },
+  { term: 'الخصخصة', def: 'بيع المؤسسات العامة للقطاع الخاص.' },
+  { term: 'الدين العام', def: 'تراكم اقتراض الحكومة لتغطية العجز.' },
+  { term: 'التضخم', def: 'ارتفاع مستمر في المستوى العام للأسعار.' },
+  { term: 'الكساد', def: 'هبوط حاد طويل الأمد في النشاط الاقتصادي.' },
+  { term: 'السياسة المالية', def: 'إدارة الحكومة للإنفاق والضرائب.' },
+  { term: 'السياسة النقدية', def: 'إدارة البنك المركزي لعرض النقود والفائدة.' },
+  { term: 'البرادايم', def: 'النموذج المعرفي المسيطر على علم في فترة.' },
+  { term: 'الإبستمولوجيا', def: 'فرع الفلسفة الذي يدرس المعرفة.' },
+  { term: 'الأنطولوجيا', def: 'فرع الفلسفة الذي يدرس الوجود.' },
+  { term: 'الفرضية', def: 'تفسير مؤقت قابل للاختبار لظاهرة.' },
+  { term: 'المتغير المستقل', def: 'المتغير المفسِّر (المؤثر).' },
+  { term: 'المتغير التابع', def: 'المتغير المفسَّر (المتأثر).' },
+  { term: 'الارتباط', def: 'علاقة إحصائية بين متغيرين دون افتراض السببية.' },
+  { term: 'السببية', def: 'علاقة يسبب فيها X تغير Y.' },
+  { term: 'تحليل المضمون', def: 'منهج لتحليل النصوص وتحديد معانيها.' },
+  { term: 'الفجوة البحثية', def: 'جانب لم يُدرس بعد في الأدبيات.' },
+  { term: 'الاقتباس المباشر', def: 'نقل النص حرفياً بين علامتي تنصيص.' },
+  { term: 'الاقتباس غير المباشر', def: 'إعادة صياغة فكرة بأسلوب الباحث.' },
+  { term: 'الانتحال', def: 'نسبة عمل الغير للنفس.' },
+  { term: 'APA', def: 'نظام توثيق شائع في العلوم الاجتماعية.' },
+  { term: 'Zotero', def: 'برنامج مجاني مفتوح المصدر لإدارة المراجع.' },
+  { term: 'Mendeley', def: 'برنامج مجاني أساسي لإدارة المراجع والـPDF.' },
+  { term: 'EndNote', def: 'برنامج مدفوع متخصص لإدارة المراجع.' },
+  { term: 'المدرسة التجارية', def: 'مدرسة تعتبر الذهب والفضة مصدر الثروة.' },
+  { term: 'الفيزيوقراطية', def: 'مدرسة تعتبر الزراعة المصدر الحقيقي للثروة.' },
+  { term: 'اليد الخفية', def: 'آلية السوق التي تحول المصلحة الفردية لصالح عام (سميث).' },
+  { term: 'إعادة توزيع الثروة', def: 'سياسات تقلص الفوارق بين الفئات الاجتماعية.' },
+  { term: 'العدالة الاجتماعية', def: 'ضمان حد أدنى من الرفاهية للجميع.' },
+  { term: 'السلعة العامة', def: 'سلعة لا يمكن استبعاد أحد من الاستفادة منها (كالدفاع).' },
+  { term: 'الخارجيات', def: 'تكاليف أو منافع لا يتحملها/يحصل عليها المنتج.' }
+];
+
+function renderGlossary() {
+  const container = document.getElementById('glossaryList');
+  if (!container) return;
+  const q = (document.getElementById('glossarySearch')?.value || '').toLowerCase();
+  const filtered = glossaryData.filter(g => g.term.toLowerCase().includes(q) || g.def.toLowerCase().includes(q));
+  if (!filtered.length) {
+    container.innerHTML = '<div class="empty-state"><div class="es-ico">🔍</div><p>لا توجد نتائج</p></div>';
+    return;
+  }
+  container.innerHTML = filtered.map(g => `
+    <div class="course-card" style="cursor:default">
+      <div style="font-weight:800;color:var(--royal-2);margin-bottom:4px">${g.term}</div>
+      <div style="font-size:14px;color:var(--ink-2);line-height:1.7">${g.def}</div>
+    </div>
+  `).join('');
+}
+
+function filterGlossary() { renderGlossary(); }
+
+/* ═══════════════════════════════════════════════════════════
+   الجزء الثامن: الملاحظات والمهام
+   ═══════════════════════════════════════════════════════════ */
+function addNote() {
+  const input = document.getElementById('noteInput');
+  const text = input.value.trim();
+  if (!text) { showToast('⚠️ اكتبي ملاحظة أولاً'); return; }
+  state.notes.unshift({ text, date: new Date().toISOString() });
+  saveState();
+  input.value = '';
+  renderNotes();
+  showToast('✓ تم إضافة الملاحظة');
+}
+
+function renderNotes() {
+  const container = document.getElementById('notesList');
+  if (!container) return;
+  if (!state.notes.length) {
+    container.innerHTML = '<div class="empty-state"><div class="es-ico">📝</div><p>لا توجد ملاحظات بعد</p></div>';
+    return;
+  }
+  container.innerHTML = state.notes.map((n, i) => `
+    <div class="note-card">
+      <div class="nc-date">${new Date(n.date).toLocaleDateString('ar-DZ', {year:'numeric',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'})}</div>
+      <div>${escapeHtml(n.text)}</div>
+      <button class="nc-del" onclick="deleteNote(${i})">✕</button>
+    </div>
+  `).join('');
+}
+
+function deleteNote(i) {
+  state.notes.splice(i, 1);
+  saveState();
+  renderNotes();
+}
+
+function addTask() {
+  const input = document.getElementById('taskInput');
+  const text = input.value.trim();
+  if (!text) return;
+  state.tasks.push({ text, done: false, id: Date.now() });
+  saveState();
+  input.value = '';
+  renderTasks();
+}
+
+function renderTasks() {
+  const container = document.getElementById('tasksList');
+  if (!container) return;
+  if (!state.tasks.length) {
+    container.innerHTML = '<div class="empty-state"><div class="es-ico">✅</div><p>لا توجد مهام بعد</p></div>';
+    return;
+  }
+  container.innerHTML = state.tasks.map(t => `
+    <div class="task-item ${t.done ? 'done' : ''}">
+      <button class="task-check ${t.done ? 'done' : ''}" onclick="toggleTask(${t.id})">✓</button>
+      <div class="task-text">${escapeHtml(t.text)}</div>
+      <button class="task-del" onclick="deleteTask(${t.id})">✕</button>
+    </div>
+  `).join('');
+}
+
+function toggleTask(id) {
+  const t = state.tasks.find(x => x.id === id);
+  if (t) { t.done = !t.done; saveState(); renderTasks(); }
+}
+
+function deleteTask(id) {
+  state.tasks = state.tasks.filter(x => x.id !== id);
+  saveState();
+  renderTasks();
+}
+
+/* ═══════════════════════════════════════════════════════════
+   الجزء التاسع: البحث الشامل
+   ═══════════════════════════════════════════════════════════ */
+function doGlobalSearch() {
+  const q = document.getElementById('globalSearch').value.trim().toLowerCase();
+  const container = document.getElementById('searchResults');
+  if (!q) { container.innerHTML = ''; return; }
+  const results = [];
+  [...econUnits, ...methUnits].forEach(u => {
+    if (u.title.toLowerCase().includes(q) || u.desc.toLowerCase().includes(q)) {
+      results.push({ type: 'درس', title: u.title, desc: u.desc, action: `openLesson('${u.id}')` });
+    }
+  });
+  glossaryData.forEach(g => {
+    if (g.term.toLowerCase().includes(q) || g.def.toLowerCase().includes(q)) {
+      results.push({ type: 'مصطلح', title: g.term, desc: g.def, action: `nav('glossary')` });
+    }
+  });
+  if (!results.length) {
+    container.innerHTML = '<div class="empty-state"><div class="es-ico">🔍</div><p>لا توجد نتائج مطابقة</p></div>';
+    return;
+  }
+  container.innerHTML = results.map(r => `
+    <div class="lesson-item" onclick="${r.action}">
+      <div class="li-num" style="background:var(--lilac-soft);color:#fff;font-size:11px;font-weight:700">${r.type === 'درس' ? '📖' : '📚'}</div>
+      <div class="li-body">
+        <div class="li-title">${r.title}</div>
+        <div class="li-sub">${r.desc}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+/* ═══════════════════════════════════════════════════════════
+   الجزء العاشر: بومودورو
+   ═══════════════════════════════════════════════════════════ */
+let pomoTimer = null;
+let pomoSeconds = 25 * 60;
+let pomoRunning = false;
+let pomoIsBreak = false;
+
+function pomoToggle() {
+  if (pomoRunning) {
+    clearInterval(pomoTimer);
+    document.getElementById('pomoStart').textContent = '▶ استئناف';
+  } else {
+    pomoTimer = setInterval(() => {
+      pomoSeconds--;
+      updatePomoDisplay();
+      if (pomoSeconds <= 0) {
+        clearInterval(pomoTimer);
+        pomoRunning = false;
+        if (!pomoIsBreak) {
+          state.pomodoroSessions++;
+          saveState();
+          showToast('🎉 انتهت جلسة التركيز! خذي 5 دقائق راحة');
+          pomoIsBreak = true;
+          pomoSeconds = 5 * 60;
+          document.getElementById('pomoMode').textContent = 'وقت الراحة';
+        } else {
+          showToast('انتهت الراحة. وقت التركيز مجدداً!');
+          pomoIsBreak = false;
+          pomoSeconds = 25 * 60;
+          document.getElementById('pomoMode').textContent = 'وقت التركيز';
+        }
+        document.getElementById('pomoStart').textContent = '▶ ابدأ';
+        document.getElementById('pomoCount').textContent = `الجلسات المكتملة: ${state.pomodoroSessions}`;
+      }
+    }, 1000);
+    document.getElementById('pomoStart').textContent = '⏸ إيقاف';
+  }
+  pomoRunning = !pomoRunning;
+}
+
+function pomoReset() {
+  clearInterval(pomoTimer);
+  pomoRunning = false;
+  pomoIsBreak = false;
+  pomoSeconds = 25 * 60;
+  document.getElementById('pomoMode').textContent = 'وقت التركيز';
+  document.getElementById('pomoStart').textContent = '▶ ابدأ';
+  updatePomoDisplay();
+}
+
+function updatePomoDisplay() {
+  const m = Math.floor(pomoSeconds / 60).toString().padStart(2, '0');
+  const s = (pomoSeconds % 60).toString().padStart(2, '0');
+  document.getElementById('pomoTime').textContent = `${m}:${s}`;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   الجزء الحادي عشر: أدوات مساعدة
+   ═══════════════════════════════════════════════════════════ */
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(t._timeout);
+  t._timeout = setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+function escapeHtml(s) {
+  const div = document.createElement('div');
+  div.textContent = s;
+  return div.innerHTML;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   الجزء الثاني عشر: التهيئة
+   ═══════════════════════════════════════════════════════════ */
+window.addEventListener('scroll', () => {
+  const fab = document.getElementById('fabTop');
+  if (window.scrollY > 300) fab.classList.add('visible');
+  else fab.classList.remove('visible');
+});
+
+function renderAll() {
+  renderHome();
+  if (currentView === 'economics') renderEconUnits();
+  if (currentView === 'methodology') renderMethUnits();
+  if (currentView === 'quizzes') renderQuizList();
+  if (currentView === 'glossary') renderGlossary();
+  if (currentView === 'notes') renderNotes();
+  if (currentView === 'tasks') renderTasks();
+  if (currentView === 'flashcards') renderFlashcard();
+  updateBottomNav();
+  updateDrawerNav();
+}
+
+// init
+document.addEventListener('DOMContentLoaded', () => {
+  applyTheme();
+  updateBottomNav();
+  updateDrawerNav();
+  renderHome();
+  pomoSeconds = 25 * 60;
+  updatePomoDisplay();
+  document.getElementById('pomoCount').textContent = `الجلسات المكتملة: ${state.pomodoroSessions}`;
+});
+
+// error guard
+window.addEventListener('error', (e) => {
+  console.warn('Runtime error caught:', e.message);
+});
+</script>
+</body>
+</html>
